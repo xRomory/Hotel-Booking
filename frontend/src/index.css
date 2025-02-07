@@ -1,0 +1,16 @@
+:root {
+  /* color-scheme: light dark; */
+  /* background: linear-gradient(to right, #000046, #1cb5e0); */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*Resets default margin, padding, and the browser*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

@@ -1,0 +1,97 @@
+:root {
+  --PrimaryColor: hsl(50, 100%, 91%);
+  --HoverColor: hsl(50, 100%, 81%);
+  --whiteColor: hsl(0, 0, 100%);
+  --blackColor: hsl(0, 0, 18%);
+  --LightDarkHover: hsla(0, 0%, 15%, 0.9);
+  --blackHover: hsla(0, 0%, 11%, 0.9);
+  --textColor: hsl(240, 1%, 48%);
+  --grayBG: hsl(240, 1%, 66%);
+  --grayText: rgb(190, 190, 190);
+  --whiteColorDeam: hsl(0, 0%, 93%);
+  --inputColor: hsl(330, 12%, 97%);
+  // box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.334);
+}
+
+.footer {
+  background: var(--blackHover);
+  padding: 2rem;
+
+  .sec-container {
+    gap: 1.5rem;
+    text-align: center;
+
+    .footer-logo {
+      padding-bottom: .5rem;
+      .logo {
+        font-weight: 500;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+
+        .icon {
+          color: var(--PrimaryColor);
+          font-size: 25px;
+        }
+
+        .brand-name {
+          font-family: 'Merriweather';
+          color: white;
+          text-transform: uppercase;
+          font-weight: 900;
+          font-size: 20px;
+          padding: 5px 3px 0;
+        }
+      }
+    }
+
+    .socials {
+      gap: .5rem;
+      margin: auto;
+      justify-content: center;
+
+      .icon {
+        font-size: 30px;
+        background: var(--PrimaryColor);
+        border-radius: 50%;
+        padding: 8px;
+        
+        &:hover {
+          background: var(--blackColor);
+          border: 1px solid var(--PrimaryColor);
+          color: var(--PrimaryColor);
+        }
+      }
+    }
+
+    .footer-links {
+      display: grid;
+      row-gap: .2rem;
+
+      .link-title {
+        font-family: 'Oswald';
+        padding-bottom: .5rem;
+        color: var(--PrimaryColor);
+        font-weight: 600;
+      }
+
+      li {
+        &:hover {
+          transform: translateX(10px);
+
+          a {
+            color: var(--PrimaryColor);
+          }
+        }
+
+      }
+
+      a {
+        color: white;
+        font-family: 'Oswald';
+        font-size: 13px;
+        font-weight: 400;
+      }
+    }
+  }
+}

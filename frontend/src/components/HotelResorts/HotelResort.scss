@@ -1,0 +1,197 @@
+/* Colors */
+:root {
+  --PrimaryColor: hsl(50, 100%, 91%);
+  --HoverColor: hsl(50, 100%, 81%);
+  --whiteColor: hsl(0, 0, 100%);
+  --blackColor: hsl(0, 0, 18%);
+  --LightDarkHover: hsla(0, 0%, 15%, 0.9);
+  --blackHover: hsla(0, 0%, 11%, 0.9);
+  --textColor: hsl(240, 1%, 48%);
+  --grayBG: hsl(240, 1%, 66%);
+  --grayText: rgb(190, 190, 190);
+  --whiteColorDeam: hsl(0, 0%, 93%);
+  --inputColor: hsl(330, 12%, 97%);
+  // box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.334);
+}
+
+.amenities {
+  padding-top: 17.5rem;
+
+  .sec-container {
+    .sec-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+
+      .text-div {
+        .sec-title {
+          font-family: 'Newsreader';
+          color: var(--blackColor);
+          line-height: 2rem;
+          padding-bottom: .5rem;
+        }
+
+        p {
+          font-family: 'Newsreader';
+          font-size: 15px;
+          color: var(--textColor);
+          font-weight: 500;
+        }
+      }
+      .icons-div {
+        gap: 0.5rem;
+
+        .icon {
+          padding: .5rem;
+          background: var(--blackHover);
+          color: var(--PrimaryColor);
+          border-radius: 50%;
+          font-size: 2.5rem;
+
+          &:hover {
+            background: var(--LightDarkHover);
+          }
+        }
+
+        .left-icon {
+          background: var(--grayBG);
+          color: var(--blackColor);
+          &:hover {
+            background: var(--grayText);
+          }
+        }
+      }
+    }
+
+    .main-content {
+      padding: 2rem 0;
+      gap: 1rem;
+
+      .single-amenities {
+        overflow: hidden;
+        border-radius: 1rem;
+        box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.334);
+
+        .amenities-image {
+          height: 200px;
+          width: 100%;
+          position: relative;
+          overflow: hidden;
+
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+
+          .overlay-info {
+            position: absolute;
+            display: flex;
+            align-items: flex-start;
+            padding: 0;
+            // padding: 1rem 1.5rem;
+            justify-content: center;
+            flex-direction: column;
+            background: linear-gradient(rgba(0, 0, 0, 0.846), rgba(0, 0, 0, 0.759));
+            bottom: 0;
+            width: 100%;
+            // height: 100%;
+            height: 0;
+            overflow: hidden;
+
+            h3 {
+              color: white;
+              font-size: 600;
+              font-family: 'Oswald';
+            }
+
+            p {
+              color: white;
+              opacity: .7;
+              font-size: 13px;
+            }
+
+            .icon {
+              position: absolute;
+              right: 10px;
+              bottom: 10px;
+              padding: .5rem;
+              background: var(--PrimaryColor);
+              font-size: 2.5rem;
+              border-radius: 50%;
+              color: var(--blackColor);
+              border: 1px solid var(--PrimaryColor);
+              transition: .3s ease;
+
+              &:hover {
+                background: var(--blackColor);
+                border: 1px solid var(--PrimaryColor);
+                color: var(--PrimaryColor);
+              }
+            }
+          }
+        }
+
+        .amenities-footer {
+          padding: 1rem;
+
+          .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--blackColor);
+            position: relative;
+            width: max-content;
+            &::after {
+              content: '';
+              position: absolute;
+              background: black;
+              top: 45%;
+              right: -150%;
+              height: 5px;
+              width: 45px;
+              border-radius: 1rem;
+            }
+          }
+
+          .amenities-text {
+            justify-content: space-between;
+
+            h6 {
+              color: var(--blackColor);
+              font-size: 15px;
+            }
+
+            .flex {
+              font-size: 16px;
+              font-weight: 600;
+              align-items: flex-start;
+              transform: translateY(5px);
+
+              .icon {
+                color: black;
+              }
+
+              .brand-name {
+                font-family: 'Newsreader';
+              }
+            }
+          }
+        }
+
+        &:hover {
+          .overlay-info {
+            overflow: visible;
+            padding: 1rem 1.5rem;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 480px) {
+  // .amenities {
+  //   padding-top: 10rem;
+  // }
+}

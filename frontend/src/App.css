@@ -1,0 +1,116 @@
+/* Default Styling Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Oswald:wght@200..700&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  transition: .3s ease;
+}
+
+/* Colors */
+:root {
+  --PrimaryColor: hsl(50, 100%, 91%);
+  --HoverColor: hsl(50, 100%, 81%);
+  --whiteColor: hsl(0, 0, 100%);
+  --blackColor: hsl(0, 0, 18%);
+  --LightDarkHover: hsla(0, 0%, 15%, 0.9);
+  --blackHover: hsla(0, 0%, 11%, 0.9);
+  --textColor: hsl(240, 1%, 48%);
+  --grayBG: hsl(0, 0%, 96%);
+  --grayText: rgb(190, 190, 190);
+  --whiteColorDeam: hsl(0, 0%, 93%);
+  --inputColor: hsl(330, 12%, 97%);
+  /* box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.334); */
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.section {
+  padding: 4rem 0 2 rem;
+}
+
+.container {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  align-items: center;
+}
+
+.icon {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.btn {
+  padding: .4rem 1.5rem;
+  background: black;
+  font-family: 'Oswald';
+  border: none;
+  border-radius: none;
+  cursor: pointer;
+}
+
+.btn a {
+  color: white;
+  font-weight: 500;
+}
+
+.btn:hover a {
+  color: white;
+}
+
+.nav-item a {
+  font-family: 'Oswald';
+  text-transform: uppercase;
+}
+
+.sec-intro {
+  max-width: 70%;
+  text-align: center;
+  margin: 0 auto 2rem;
+}
+
+.sec-intro .sec-title {
+  color: black;
+  line-height: 1.5rem;
+  padding-bottom: .5rem;
+}
+
+.sec-intro p {
+  font-size: 13px;
+  color: var(--textColor);
+  font-weight: 500;
+}
+
+img, video {
+  width: 100%;
+  height: auto;
+}
+
+input {
+  font-size: 100%;
+}
+
+/* Media Queries */
+@media screen and (min-width: 556px) {
+  .main-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

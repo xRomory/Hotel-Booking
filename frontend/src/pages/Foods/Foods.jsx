@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+import '../../App.css';
+import FoodHeader from '../../components/FoodHeader/FoodHeader';
 
 const Foods = () => {
   return (
-    <div>Foods</div>
+    <>
+      <FoodHeader/>
+    </>
   )
 }
 

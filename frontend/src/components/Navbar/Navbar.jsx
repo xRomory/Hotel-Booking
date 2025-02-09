@@ -52,7 +52,7 @@ function navbar() {
               </a>
             </li>
             <li className="nav-item">
-              <Link to="/pages/Foods" className="nav-link">
+              <Link to="/Foods" className="nav-link">
                 Food
               </Link>
             </li>

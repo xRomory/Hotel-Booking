@@ -1,0 +1,35 @@
+// Color Theme
+:root {
+  --PrimaryColor: hsl(50, 100%, 91%);
+  --HoverColor: hsl(50, 100%, 81%);
+  --whiteColor: hsl(0, 0, 100%);
+  --blackColor: hsl(0, 0, 18%);
+  --LightDarkHover: hsla(0, 0%, 15%, 0.9);
+  --blackHover: hsla(0, 0%, 11%, 0.9);
+  --textColor: hsl(240, 1%, 48%);
+  --grayBG: hsl(240, 1%, 66%);
+  --grayText: rgb(190, 190, 190);
+  --whiteColorDeam: hsl(0, 0%, 93%);
+  --inputColor: hsl(330, 12%, 97%);
+  // box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.334);
+}
+
+.food-section {
+  height: 80vw;
+  margin: auto;
+  background: linear-gradient(rgba(33, 33, 33, 0.522), rgba(33, 33, 33, 0.522)), url(../../assets/hotel_dinner4.jpg) no-repeat center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  .section-header {
+    position: absolute;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.5vw;
+    max-width: 50%;
+    bottom: 10%;
+    left: 6vw;
+  }
+}

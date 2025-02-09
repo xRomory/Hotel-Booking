@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './Footer.scss'
 import { FaHotel } from "react-icons/fa6";
 import { FaFacebookF } from "react-icons/fa";
@@ -11,12 +12,18 @@ const Footer = () => {
       <div className="sec-container container grid">
         <div className="logo-div">
           <div className="footer-logo">
-            <a href="#" className="logo flex">
+            <Link className="logo flex">
+            <h1 className='flex'>
+                <FaHotel className='icon'/>
+                <span className='brand-name'>Pseubomotel</span>
+              </h1>
+            </Link>
+            {/* <a href="#" className="logo flex">
               <h1 className='flex'>
                 <FaHotel className='icon'/>
                 <span className='brand-name'>Pseubomotel</span>
               </h1>
-            </a>
+            </a> */}
           </div>
 
           <div className="socials flex">
@@ -32,7 +39,8 @@ const Footer = () => {
           </span>
 
           <li>
-            <a href="#">Home</a>
+            <Link to="/">Home</Link>
+            {/* <a href="#">Home</a> */}
           </li>
           <li>
             <a href="#">Hotel Amenities</a>
@@ -40,6 +48,14 @@ const Footer = () => {
           <li>
             <a href="#">About Us</a>
           </li>
+        </div>
+
+        <div className="footer-links">
+          <span className="link-title">
+            Contact Us
+          </span>
+          <span className="phone">+63 912 345 6789</span>
+          <span className="email">pseubomotel@hotel.com</span>
         </div>
       </div>
     </div>

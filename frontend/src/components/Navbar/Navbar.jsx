@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { Link } from 'react-router-dom';
 import './Navbar.scss'
 import { FaHotel } from "react-icons/fa6";
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -29,12 +30,18 @@ function navbar() {
     <section className='navbar-section'>
       <div className={transparent}>
         <div className="logo-div">
-          <a href="" className="logo">
+          <Link to="/" className="logo">
+          <h1 className='flex'>
+              <FaHotel className='icon'/>
+              <span className='brand-name'>PSEUBOMOTEL</span>
+            </h1>
+          </Link>
+          {/* <a href="" className="logo">
             <h1 className='flex'>
               <FaHotel className='icon'/>
               <span className='brand-name'>PSEUBOMOTEL</span>
             </h1>
-          </a>
+          </a> */}
         </div>
 
         <div className={active}>
@@ -45,9 +52,9 @@ function navbar() {
               </a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link">
-                Foods
-              </a>
+              <Link to="/pages/Foods" className="nav-link">
+                Food
+              </Link>
             </li>
             <li className="nav-item">
               <a href="#" className="nav-link">

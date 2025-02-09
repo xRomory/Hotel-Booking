@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import FoodPage from './pages/Foods/Foods'
+
 import './App.css'
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
@@ -10,16 +13,26 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div className='App'>
-        <Navbar/>
-        <Home/>
-        <HotelResorts/>
-        <About/>
-        <Footer/>
-      </div>
-      
-    </>
+      <Router>
+        <div className='App'>
+          <Navbar/>
+          <Routes>
+            <Route 
+              path="/"
+              element={
+                <>
+                  <Home/>
+                  <HotelResorts/>
+                  <About/>
+                </>
+              }
+            />
+            <Route path="/pages/Foods" element={<FoodPage/>} />
+          </Routes>
+          
+          <Footer/>
+        </div>
+      </Router>
   )
 }
 

@@ -64,7 +64,7 @@
         }
 
         // Responsive Web Design for 768px 
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 1100px) {
             .logo-div{
                 margin: auto;
             }
@@ -176,10 +176,10 @@
     }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 1101px) {
   .navbar-section {
     .toggle-navbar-menu, .close-navbar {
-        display: none;
+      display: none;
     }
     
     .header {

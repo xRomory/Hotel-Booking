@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+#Things to avoid changing
+node_modules/
+venv/
+.env
+__pycache__/

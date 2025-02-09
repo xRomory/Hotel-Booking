@@ -133,9 +133,38 @@
   }
 }
 
+@media screen and (max-width: 479px) {
+  .home {
+    .section-container {
+      .home-card {
+        bottom: -100px;
+        width: 80%;
+        height: 40%;
+        grid-template-columns: repeat(1, 1fr);
+
+        .location-div, .schedule-div, .price-div {
+          label {
+            font-size: 10px;
+          }
+
+          input {
+            font-size: 10px;
+          }
+        }
+
+        .btn {
+          margin: auto;
+          width: 80%;
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 480px) {
   .home {
-    .sec-container {
+    .section-container {
       .home-card {
         bottom: -100px;
         width: 90%;
@@ -151,7 +180,7 @@
 
 @media screen and (min-width: 556px) {
   .home {
-    .sec-container {
+    .section-container {
       .home-text {
         .tagline-title {
           font-size: 2.5rem;
@@ -167,9 +196,50 @@
 
 @media screen and (min-width: 720px) {
   .home {
-    .sec-container {
+    .section-container {
+      .home-text {
+        .tagline-title {
+          font-size: 3.5rem;
+          line-height: 4rem;
+          margin: auto;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .home {
+    .section-container {
       .home-card {
         bottom: -10%;
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .home {
+    .section-container {
+      .home-text {
+        .hotel-description {
+          font-size: 20px;
+        }
+      }
+
+      .home-card {
+        width: 70%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .home {
+    .section-container {
+      .home-text {
+        padding: 1rem 10rem;
       }
     }
   }

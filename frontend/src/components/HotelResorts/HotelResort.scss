@@ -15,7 +15,7 @@
 }
 
 .amenities {
-  padding-top: 17.5rem;
+  padding-top: 10rem;
 
   .sec-container {
     .sec-header {
@@ -191,7 +191,70 @@
 }
 
 @media screen and (min-width: 480px) {
-  // .amenities {
-  //   padding-top: 10rem;
-  // }
+  .amenities {
+    padding-top: 10rem;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .amenities {
+    padding-top: 7rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .amenities {
+    padding-top: 10rem;
+
+    .sec-container{
+      .sec-header {
+        .text-div {
+          .sec-title {
+            font-size: 2.2rem;
+          }
+
+          p {
+            font-size: 15px;
+          }
+        }
+      }
+
+      .main-content {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem !important;
+
+        .amenities-footer {
+          .amenities-text {
+            .flex {
+              .brand-name {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 550px) {
+  .amenities {
+    .sec-container {
+      .sec-header {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .text-div {
+          text-align: start;
+          max-width: 70%;
+        }
+
+        .icons-div {
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
 }

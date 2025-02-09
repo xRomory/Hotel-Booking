@@ -28,12 +28,10 @@ const Home = () => {
 
           <div className="schedule-div">
             <label htmlFor="schedule">Schedule</label>
-            {/* <input type="text" placeholder='Date:'/>  */}
             <HotelDatePicker/>
-
           </div>
-{/* 
-          <div className="price-div">
+
+          {/* <div className="price-div">
             <label htmlFor="price">Amount</label>
             <input type="text" placeholder='Hotel Price'/>
           </div> */}

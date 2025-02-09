@@ -76,6 +76,10 @@ li {
   color: white;
 }
 
+.btn:hover {
+  background: var(--blackHover);
+}
+
 .nav-item a {
   font-family: 'Oswald';
   text-transform: uppercase;
@@ -112,5 +116,12 @@ input {
 @media screen and (min-width: 556px) {
   .main-content {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 884px) {
+  .container {
+    width: 75% !important;
+    margin: auto !important;
   }
 }

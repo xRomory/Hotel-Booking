@@ -10,7 +10,7 @@ import img3 from '../../assets/hotel_poolside3.jpg'
 import img4 from '../../assets/hotel_room.jpg'
 import img5 from '../../assets/hotel_beach_topview.jpg'
 
-
+// Boilerplates for Data
 const Data = [
   {
     id: 1,

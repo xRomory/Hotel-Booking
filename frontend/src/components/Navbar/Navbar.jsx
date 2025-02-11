@@ -47,9 +47,9 @@ function navbar() {
         <div className={active}>
           <ul className="nav-lists flex">
             <li className="nav-item">
-              <a href="#" className="nav-link">
-                Hotel & Resorts
-              </a>
+              <Link to = "/Rooms" className="nav-link" >
+              Hotel Rooms
+              </Link>
             </li>
             <li className="nav-item">
               <Link to="/Foods" className="nav-link">

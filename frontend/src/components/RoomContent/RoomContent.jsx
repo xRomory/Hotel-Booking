@@ -1,5 +1,5 @@
 import React from 'react'
-import './HotelResort.scss'
+import './RoomContent.scss'
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { BsArrowRightShort } from "react-icons/bs";
@@ -10,58 +10,87 @@ import { assets } from '../../assets/assets';
 const Data = [
   {
     id: 1,
-    imgSrc: assets.poolside,
-    amenitiesTitle: 'Pool Side',
-    location: 'West Wing',
-    description: 'Lorem Ipsum'
+    imgSrc: assets.deluxeKing,
+    roomsTitle: 'Deluxe King Room',
+    price: '5,000/night',
+    description: 'Indulge in Space, Comfort, and Style'
   },
 
   {
     id: 2,
-    imgSrc: assets.food,
-    amenitiesTitle: 'Pseubomotel Food Room',
-    location: 'North Wing',
-    description: 'Lorem Ipsum'
+    imgSrc: assets.deluxeSuite,
+    roomsTitle: 'Deluxe Suite Room',
+    price: '7,000/night',
+    description: 'Sophistication meets Serenity'
   },
 
   {
     id: 3,
-    imgSrc: assets.poolside2,
-    amenitiesTitle: 'Pool Side',
-    cation: 'Center Wing',
-    description: 'Lorem Ipsum'
+    imgSrc: assets.deluxevicHar,
+    roomsTitle: 'Deluxe Victoria Harbour Suite',
+    price: '7,500/night',
+    description: 'Wake up to stunning Harbour Views'
   },
 
   {
     id: 4,
-    imgSrc: assets.room,
-    amenitiesTitle: 'Hotel Room',
-    location: 'West Side',
+    imgSrc: assets.clubdelKing,
+    roomsTitle: 'Club Deluxe King Room',
+    price: '10,000/night',
     description: 'Lorem Ipsum'
   },
 
   {
     id: 5,
-    imgSrc: assets.beachTopView,
-    amenitiesTitle: 'Pseubomotel Beach',
-    location: 'Grand Side',
+    imgSrc: assets.clubdelVic,
+    roomsTitle: 'Club Deluxe Victoria Room',
+    price: '11,000/night',
     description: 'Lorem Ipsum'
-  }
+  },
+
+  {
+    id: 6,
+    imgSrc: assets.grandSeaview,
+    roomsTitle: 'Grand Seaview Room',
+    price: '13,000/night',
+    description: 'Lorem Ipsum'
+  },
+  
+  {
+    id: 7,
+    imgSrc: assets.deluxevicHar,
+    roomsTitle: 'Deluxe Victoria Harbour King Room',
+    price: '15,000/night',
+    description: 'Lorem Ipsum'
+  },
+  
+  {
+    id: 8,
+    imgSrc: assets.deluxeseaKing,
+    roomsTitle: 'Deluxe Seaview King Room',
+    price: '18,000/night',
+    description: 'Lorem Ipsum'
+  },
+
+  {
+    id: 9,
+    imgSrc: assets.premierexeVic,
+    roomsTitle: 'Premier Executive Harbour Suite',
+    price: '20,000/night',
+    description: 'Lorem Ipsum'
+  },
 
 ];
 
-const HotelResorts = () => {
+const RoomContent = () => {
   return (
-    <section className="amenities section container">
+    <section className="rooms section container">
       <div className="sec-container">
         <div className="sec-header flex">
           <div className="text-div">
             <h2 className="sec-title">
-              Hotel Amenities
+              Hotel Rooms
             </h2>
-            <p>
-              Indulge in luxury with Pseubomotel’s top-tier amenities, from serene spa retreats and gourmet dining to high-speed Wi-Fi and cozy, elegantly designed rooms—every detail crafted for an enchanting stay.
-            </p>
           </div>
 
           <div className="icons-div flex">
@@ -72,13 +101,13 @@ const HotelResorts = () => {
 
         <div className="main-content grid">
           {
-            Data.map(({id, imgSrc, amenitiesTitle, location, description}) => {
+            Data.map(({id, imgSrc, roomsTitle, price, description}) => {
               return (
-                <div className="single-amenities">
-                  <div className="amenities-image">
+                <div className="single-rooms">
+                  <div className="rooms-image">
                     <img src={imgSrc} alt="Image Title" />
                     <div className="overlay-info">
-                      <h3>{amenitiesTitle}</h3>
+                      <h3>{roomsTitle}</h3>
                 
                       <p>
                         {description}
@@ -88,14 +117,14 @@ const HotelResorts = () => {
                     </div>
                   </div>
 
-                  <div className="amenities-footer">
+                  <div className="rooms-footer">
                     <div className="number">
                       0{id}
                     </div>
 
-                    <div className="amenities-text flex">
+                    <div className="rooms-text flex">
                       <h6>
-                        {location}
+                        {price}
                       </h6>
                       <span className="flex">
                         <span className="dot">
@@ -115,4 +144,4 @@ const HotelResorts = () => {
   )
 }
 
-export default HotelResorts
+export default RoomContent

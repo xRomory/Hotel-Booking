@@ -28,6 +28,17 @@ import room1 from './hotel_room2.jpg';
 import hotelBg from './hotel-mainBg.jpg';
 import landscape from './hotel_landscape.jpg';
 
+//Rooms
+import deluxeKing from './deluxe_king_bed.jpg';
+import deluxeSuite from './deluxe_bed.jpg';
+import deluxevicHar from './deluxe_victoria_harbour_bed.jpg';
+import clubdelVic from './club_deluxe_victoria_bed.jpg';
+import grandSeaview from './grand_seaview_bed.jpg';
+import deluxevicharKing from './deluxe_victoria_harbour_king_bed.jpg';
+import deluxeseaKing from './deluxe_seaview_king_bed.jpg';
+import premierexeVic from './premier_executive_victoria_harbour_bed.jpg';
+import clubdelKing from './club_deluxe_king_bed.jpg';
+
 export const assets = {
   food,
   food1,
@@ -53,5 +64,14 @@ export const assets = {
   room,
   room1,
   hotelBg,
-  landscape
+  landscape,
+  deluxeKing,
+  deluxeSuite,
+  deluxevicHar,
+  premierexeVic,
+  grandSeaview,
+  deluxevicharKing,
+  deluxeseaKing,
+  clubdelKing,
+  clubdelVic,
 }

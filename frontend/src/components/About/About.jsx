@@ -1,7 +1,6 @@
 import React from 'react'
 import './About.scss'
-import img from '../../assets/hotel_garden.jpg'
-import img2 from '../../assets/hotel_dinner3.jpg'
+import { assets } from '../../assets/assets'
 
 const About = () => {
   return (
@@ -13,7 +12,7 @@ const About = () => {
 
         <div className="main-content container grid">
           <div className="single-item">
-            <img src={img} alt="Image Name" />
+            <img src={assets.garden} alt="Image Name" />
             <h3>About Pseubomotel</h3>
 
             <p>
@@ -22,7 +21,7 @@ const About = () => {
           </div>
 
           <div className="single-item">
-            <img src={img2} alt="Image Name" />
+            <img src={assets.food1} alt="Image Name" />
             <h3>Why Choose Pseubomotel</h3>
 
             <p>

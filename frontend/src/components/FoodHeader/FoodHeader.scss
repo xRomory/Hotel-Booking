@@ -15,21 +15,42 @@
 }
 
 .food-section {
-  height: 80vw;
-  margin: auto;
-  background: linear-gradient(rgba(33, 33, 33, 0.522), rgba(33, 33, 33, 0.522)), url(../../assets/hotel_dinner4.jpg) no-repeat center;
+  height: 50vw;
+  background: linear-gradient(rgba(33, 33, 33, 0.522), rgba(33, 33, 33, 0.522)), url(../../assets/hotel_garden.jpg) no-repeat center;
   background-size: cover;
+  // background-position: center;
+  // background-repeat: no-repeat;
   display: flex;
+  align-items: center;
   justify-content: center;
+  margin: auto;
   position: relative;
+  // padding: 2rem;
 
-  .section-header {
-    position: absolute;
+  .section-container {
+    // position: absolute;
     flex-direction: column;
-    align-items: start;
-    gap: 1.5vw;
-    max-width: 50%;
-    bottom: 10%;
-    left: 6vw;
+    // align-items: start;
+    // gap: 1.5vw;
+    // max-width: 50%;
+    bottom: 60%;
+    // left: 6vw;
+    animation: fadeIn 3s;
+
+    .header-text {
+      text-align: center;
+      color: white;
+
+      .tagline-text {
+        font-size: max(4.5vw, 22px);
+        font-weight: 500;
+        font-family: 'Newsreader';
+      }
+
+      .subtitle-text {
+        font-family: 'Newsreader';
+        font-size: 1vw;
+      }
+    }
   }
 }

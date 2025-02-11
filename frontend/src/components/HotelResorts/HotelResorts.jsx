@@ -4,17 +4,13 @@ import { FaLongArrowAltLeft } from "react-icons/fa";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { BsArrowRightShort } from "react-icons/bs";
 import { BsDot } from "react-icons/bs";
-import img from '../../assets/hotel_poolside.jpg'
-import img2 from '../../assets/hotel_dinner2.jpg'
-import img3 from '../../assets/hotel_poolside3.jpg'
-import img4 from '../../assets/hotel_room.jpg'
-import img5 from '../../assets/hotel_beach_topview.jpg'
+import { assets } from '../../assets/assets';
 
 // Boilerplates for Data
 const Data = [
   {
     id: 1,
-    imgSrc: img,
+    imgSrc: assets.poolside,
     amenitiesTitle: 'Pool Side',
     location: 'West Wing',
     description: 'Lorem Ipsum'
@@ -22,7 +18,7 @@ const Data = [
 
   {
     id: 2,
-    imgSrc: img2,
+    imgSrc: assets.food,
     amenitiesTitle: 'Pseubomotel Food Room',
     location: 'North Wing',
     description: 'Lorem Ipsum'
@@ -30,7 +26,7 @@ const Data = [
 
   {
     id: 3,
-    imgSrc: img3,
+    imgSrc: assets.poolside2,
     amenitiesTitle: 'Pool Side',
     location: 'Center Wing',
     description: 'Lorem Ipsum'
@@ -38,7 +34,7 @@ const Data = [
 
   {
     id: 4,
-    imgSrc: img4,
+    imgSrc: assets.room,
     amenitiesTitle: 'Hotel Room',
     location: 'West Side',
     description: 'Lorem Ipsum'
@@ -46,7 +42,7 @@ const Data = [
 
   {
     id: 5,
-    imgSrc: img5,
+    imgSrc: assets.beachTopView,
     amenitiesTitle: 'Pseubomotel Beach',
     location: 'Grand Side',
     description: 'Lorem Ipsum'

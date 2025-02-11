@@ -1,3 +1,4 @@
+// Foods
 import food from './hotel_dinner2.jpg';
 import food1 from './hotel_dinner3.jpg';
 import food2 from './hotel_dinner4.jpg';

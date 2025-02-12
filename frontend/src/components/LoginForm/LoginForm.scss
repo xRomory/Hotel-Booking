@@ -1,0 +1,141 @@
+:root {
+  --PrimaryColor: hsl(50, 100%, 91%);
+  --HoverColor: hsl(50, 100%, 81%);
+  --WhiteColor: hsl(0, 0, 100%);
+  --BlackColor: hsl(0, 0, 18%);
+  --BlackHover: hsla(0, 0%, 11%, 0.9);
+  --TextColor: hsl(240, 1%, 48%);
+  --GrayBG: hsl(0, 0%, 96%);
+  --GrayText: rgb(190, 190, 190);
+  --WhiteColorDeam: hsl(0, 0%, 93%);
+  --InputColor: hsl(330, 12%, 97%);
+  // box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.334);
+}
+
+.login-container {  
+  background: linear-gradient(rgba(33, 33, 33, 0.522), rgba(33, 33, 33, 0.522)), url(../../assets/hotel_bg1.jpg) no-repeat center;
+  background-size: cover;
+
+  .wrapper {
+    justify-content: center;
+    min-height: 100vh;
+    width: 420px;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    z-index: 900;
+    backdrop-filter: blur(5px);
+    background: transparent;
+  
+    .logo-div {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+
+      .logo {
+        color: var(--HoverColor);
+        cursor: pointer;
+        font-weight: 500;
+        align-items: center;
+        justify-content: center;
+
+        .brand-name {
+          padding: 10px 5px 0;
+          font-family: 'Merriweather';
+          font-size: 25px;
+          font-weight: 900;
+          color: white;
+        }
+      }
+    }
+
+    form {
+      h1 {
+        font-family: 'Newsreader';
+        font-size: 36px;
+        text-align: center;
+        color: white;
+      }
+    
+      .input-box {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        margin: 20px 0;
+  
+        input {
+          width: 100%;
+          height: 100%;
+          background: transparent;
+          border: none;
+          outline: none;
+          border: 2px solid rgba(0, 0, 0, 0.235);
+          padding: 20px 45px 20px 20px;
+          color: white;
+  
+          &::placeholder {
+            color: var(--WhiteColorDeam);
+          }
+        }
+
+        .icon {
+          position: absolute;
+          right: 20px;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 20px;
+          color: white;
+        }
+      }
+  
+      .remember-forgot {
+        label {
+          display: flex;
+          justify-content: space-between;
+          font-size: 15px;
+          margin: 0 0 15px;
+          gap: 1rem;
+          color: white;
+
+          a {
+            color: white;
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      button {
+        width: 100%;
+        height: 45px;
+        border: none;
+        outline: none;
+        background: white;
+        color: black;
+        cursor: pointer;
+        border-radius: 40px;
+        font-weight: 700;
+        font-size: 16px;
+      }
+
+      .register-link {
+        font-size: 15px;
+        margin: 20px 0 15px;
+        text-align: center;
+        color: white;
+
+        a {
+          color: white;;
+          font-weight: 600;
+
+          &:hover {
+            text-decoration: underline;
+          }
+          
+        }
+      }
+    }
+  }
+}

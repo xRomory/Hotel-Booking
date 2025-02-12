@@ -20,23 +20,23 @@
   height: 50vw;
   background: linear-gradient(rgba(33, 33, 33, 0.522), rgba(33, 33, 33, 0.522) 75%, rgba(255,255,255,1) 100%), url(../../assets/hotel_garden.jpg) no-repeat center;
   background-size: cover;
-  // background-position: center;
-  // background-repeat: no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: auto;
   position: relative;
-  // padding: 2rem;
+  padding: 2rem;
 
   .section-container {
     // position: absolute;
-    flex-direction: column;
-    // align-items: start;
-    // gap: 1.5vw;
-    // max-width: 50%;
-    bottom: 60%;
     // left: 6vw;
+    // max-width: 50%;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.5vw;
+    
+    bottom: 60%;
+    
     animation: fadeIn 3s;
 
     .header-text {

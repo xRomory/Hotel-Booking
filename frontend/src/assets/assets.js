@@ -27,6 +27,13 @@ import room1 from './hotel_room2.jpg';
 
 //Landscape
 import hotelBg from './hotel-mainBg.jpg';
+import hotelBg1 from './hotel_bg1.jpg'
+import hotelBg2 from './hotel_bg2.jpg'
+import hotelBg3 from './hotel_bg3.jpg'
+import hotelBg4 from './hotel_bg4.jpg'
+import hotelBg5 from './hotel_bg5.jpg'
+import hotelBg6 from './hotel_bg6.jpg'
+import hotelBg7 from './hotel_bg7.jpg'
 import landscape from './hotel_landscape.jpg';
 
 export const assets = {
@@ -54,5 +61,56 @@ export const assets = {
   room,
   room1,
   hotelBg,
+  hotelBg1,
+  hotelBg2,
+  hotelBg3,
+  hotelBg4,
+  hotelBg5,
+  hotelBg6,
+  hotelBg7,
   landscape
 }
+
+export const FoodData = [
+  {
+    id: 1,
+    image: food3,
+    name: 'Egg Salad',
+    description: 'Lorem Ipsum',
+  },
+
+  {
+    id: 2,
+    image: food4,
+    name: 'Vegetable Salad',
+    description:'Lorem Ipsum',
+  },
+
+  {
+    id: 3,
+    image: food5,
+    name: 'Pancake',
+    description: 'Lorem Ipsum',
+  },
+
+  {
+    id: 4,
+    image: food6,
+    name: 'Burrito',
+    description: 'Lorem Ipsum',
+  },
+
+  {
+    id: 5,
+    image: food7,
+    name: 'Sushi',
+    description: 'Lorem Ipsum',
+  },
+
+  {
+    id: 6,
+    image: food8,
+    name: 'Burger Combo Meal',
+    description: 'Lorem Ipsum',
+  },
+]

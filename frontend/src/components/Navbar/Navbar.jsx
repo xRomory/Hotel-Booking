@@ -31,7 +31,7 @@ function navbar() {
       <div className={transparent}>
         <div className="logo-div">
           <Link to="/" className="logo">
-          <h1 className='flex'>
+            <h1 className='flex'>
               <FaHotel className='icon'/>
               <span className='brand-name'>PSEUBOMOTEL</span>
             </h1>
@@ -75,7 +75,9 @@ function navbar() {
 
             <div className="header-btn flex">
               <button className="btn login-btn">
-                <a href="#">Login</a>
+                <Link to="/Login" className="nav-link">
+                  Login
+                </Link>
               </button>
               <button className="btn reg-btn">
                 <a href="#">Sign Up</a>

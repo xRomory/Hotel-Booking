@@ -135,12 +135,20 @@
         .rooms-footer {
           padding: 1rem;
 
+        .room-number-link {
+          text-decoration: none;
+          color: inherit;
+          cursor: pointer;
+        }
+
           .number {
             font-size: 2rem;
             font-weight: 700;
             color: var(--blackColor);
             position: relative;
             width: max-content;
+            transition: transform 0.2s ease;
+
             &::after {
               content: '';
               position: absolute;
@@ -150,6 +158,9 @@
               height: 5px;
               width: 45px;
               border-radius: 1rem;
+            }
+            &:hover {
+              transform: scale(1.1);
             }
           }
 

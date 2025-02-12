@@ -13,8 +13,9 @@
 }
 
 .login-container {  
-  background: linear-gradient(rgba(33, 33, 33, 0.522), rgba(33, 33, 33, 0.522)), url(../../assets/hotel_bg1.jpg) no-repeat center;
+  background: linear-gradient(rgba(33, 33, 33, 0.522), rgba(33, 33, 33, 0.522)), no-repeat center;
   background-size: cover;
+  transition: background-image 1s ease-in-out;
 
   .wrapper {
     justify-content: center;

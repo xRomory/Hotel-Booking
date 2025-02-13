@@ -8,7 +8,6 @@ import FoodPage from './pages/Foods/Foods';
 import RoomPage from './pages/Rooms/Rooms';
 // import HotelResorts from './components/HotelResorts/HotelResorts';
 // import About from './components/About/About';
-import RoomDetails from './components/RoomDetails/RoomDetails';
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -19,7 +18,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/Rooms" element={<RoomPage/>}/>
-        <Route path="/Rooms/:id" element ={<RoomDetails/>} />
         <Route path="/Foods" element={<FoodPage/>} />
       </Routes>
       <Footer/>

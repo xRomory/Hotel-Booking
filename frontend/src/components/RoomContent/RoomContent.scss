@@ -110,58 +110,39 @@
               opacity: .7;
               font-size: 13px;
             }
-
-            .icon {
-              position: absolute;
-              right: 10px;
-              bottom: 10px;
-              padding: .5rem;
-              background: var(--PrimaryColor);
-              font-size: 2.5rem;
-              border-radius: 50%;
-              color: var(--blackColor);
-              border: 1px solid var(--PrimaryColor);
-              transition: .3s ease;
-
-              &:hover {
-                background: var(--blackColor);
-                border: 1px solid var(--PrimaryColor);
-                color: var(--PrimaryColor);
-              }
-            }
           }
         }
 
         .rooms-footer {
           padding: 1rem;
 
-        .room-number-link {
+        .room-button-link {
           text-decoration: none;
           color: inherit;
           cursor: pointer;
         }
 
-          .number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--blackColor);
-            position: relative;
-            width: max-content;
-            transition: transform 0.2s ease;
+          .btn {
+            background-color: transparent;
+            color: black;
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            font-size: 20px;
+            font-weight: normal;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap:5px;
+            transition: all 0.3 ease-in-out;
 
-            &::after {
-              content: '';
-              position: absolute;
-              background: black;
-              top: 45%;
-              right: -150%;
-              height: 5px;
-              width: 45px;
-              border-radius: 1rem;
-            }
             &:hover {
-              transform: scale(1.1);
+              border-color: black;
+              background-color: rgba(0,0,0,0.1);
             }
+          }
+
+          .icon {
+            font-size:30px;
           }
 
           .rooms-text {
@@ -176,16 +157,6 @@
               font-size: 16px;
               font-weight: 600;
               align-items: flex-start;
-              transform: translateY(5px);
-
-              .icon {
-                color: black;
-              }
-
-              .brand-name {
-                font-family: 'Newsreader';
-                font-size: 10px;
-              }
             }
           }
         }

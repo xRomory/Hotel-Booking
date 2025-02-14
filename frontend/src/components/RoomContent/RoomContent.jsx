@@ -2,11 +2,10 @@ import React from 'react';
 import './RoomContent.scss';
 import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { BsArrowRightShort } from "react-icons/bs";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { assets } from '../../assets/assets';
-
 // Boilerplates for Data
-const Data = [
+ export const Data = [
   {
     id: 1,
     imgSrc: assets.deluxeKing,
@@ -64,6 +63,11 @@ const Data = [
 ];
 
 const RoomContent = () => {
+  const navigate = useNavigate()
+  const handleViewDetails =(id) => {
+    navigate(`/Rooms/${id}`);
+  }
+
   return (
     <section className="rooms section container">
       <div className="sec-container">
@@ -91,12 +95,13 @@ const RoomContent = () => {
               </div>
 
               <div className="rooms-footer flex">
-                <Link to={`/room/${id}`} className="room-number-link">
-                  <button className="btn flex">
-                    View Details
-                    <BsArrowRightShort className="icon" />
-                  </button>
-                </Link>
+              <Link to={`/Rooms/${id}`} className="room-button-link">
+             <button className="btn flex" onClick={() => handleViewDetails(id)}>
+               View Details
+             <BsArrowRightShort className="icon" />
+            </button>
+              </Link>
+
               </div>
             </div>
           ))}

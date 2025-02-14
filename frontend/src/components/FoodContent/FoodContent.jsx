@@ -1,12 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import './FoodContent.scss'
-// import { FoodContext } from '../../context/FoodContext';
-// import FoodItems from '../FoodItems/FoodItems.jsx';
 import { FoodData } from "../../assets/assets";
 import { BsArrowRightShort } from "react-icons/bs";
 
 const FoodContent = () => {
-  // const {FoodData} = useContext(FoodContext)
 
   return (
     <section className="food-menu section container">

@@ -63,9 +63,9 @@ function navbar() {
               </a>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link">
+              <Link to="/HotelAmenities" className='nav-link'>
                 Hotel Amenities
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <a href="#" className="nav-link">
@@ -80,7 +80,9 @@ function navbar() {
                 </Link>
               </button>
               <button className="btn reg-btn">
-                <a href="#">Sign Up</a>
+                <Link to="/Registration" className="nav-link">
+                  Sign Up
+                </Link>
               </button>
             </div>
           </ul>

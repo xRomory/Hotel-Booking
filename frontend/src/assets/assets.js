@@ -36,6 +36,13 @@ import hotelBg6 from './hotel_bg6.jpg'
 import hotelBg7 from './hotel_bg7.jpg'
 import landscape from './hotel_landscape.jpg';
 
+//Beach Amenities
+import beach from './hotel_beach.jpg'
+import beach1 from './hotel_beach1.jpg'
+import beach2 from './hotel_beach2.jpg'
+import beach3 from './hotel_beach3.jpg'
+import beach4 from './hotel_beach4.jpg'
+
 export const assets = {
   food,
   food1,
@@ -68,7 +75,12 @@ export const assets = {
   hotelBg5,
   hotelBg6,
   hotelBg7,
-  landscape
+  landscape,
+  beach,
+  beach1,
+  beach2,
+  beach3,
+  beach4,
 }
 
 export const FoodData = [

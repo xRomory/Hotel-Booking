@@ -4,11 +4,17 @@ import { FaLongArrowAltLeft, FaLongArrowAltRight } from "react-icons/fa";
 import { BsArrowRightShort } from "react-icons/bs";
 import { Link, useNavigate } from 'react-router-dom';
 import { assets } from '../../assets/assets';
+
 // Boilerplates for Data
  export const Data = [
   {
     id: 1,
     imgSrc: assets.deluxeKing,
+    extraImages: [
+      assets.deluxeKing1,
+      assets.deluxeKing2,
+      assets.deluxeKing3,
+    ],
     roomsTitle: 'Deluxe King Room',
     description: 'Indulge in Space, Comfort, and Style'
   },
@@ -65,7 +71,7 @@ import { assets } from '../../assets/assets';
 const RoomContent = () => {
   const navigate = useNavigate()
   const handleViewDetails =(id) => {
-    navigate(`/Rooms/${id}`);
+    navigate(`/rooms/${id}`);
   }
 
   return (
@@ -90,17 +96,16 @@ const RoomContent = () => {
                 <div className="overlay-info">
                   <h3>{roomsTitle}</h3>
                   <p>{description}</p>
-                  <BsArrowRightShort className='icon' />
                 </div>
               </div>
 
               <div className="rooms-footer flex">
-              <Link to={`/Rooms/${id}`} className="room-button-link">
-             <button className="btn flex" onClick={() => handleViewDetails(id)}>
-               View Details
-             <BsArrowRightShort className="icon" />
-            </button>
-              </Link>
+              <Link to={`/rooms/${id}`} className="room-button-link">
+                 <button className="btn flex">
+                   View Details
+                   <BsArrowRightShort className="icon" />
+                   </button>
+                     </Link>
 
               </div>
             </div>

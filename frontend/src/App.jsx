@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import FoodPage from './pages/Foods/Foods';
 import RoomPage from './pages/Rooms/Rooms';
+import RoomDetailsPage from './pages/RoomDetails/RoomDetails';
 // import HotelResorts from './components/HotelResorts/HotelResorts';
 // import About from './components/About/About';
 
@@ -17,8 +18,9 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/Rooms" element={<RoomPage/>}/>
+        <Route path="/rooms" element={<RoomPage/>}/>
         <Route path="/Foods" element={<FoodPage/>} />
+        <Route path ="rooms/:id" element ={<RoomDetailsPage />} />
       </Routes>
       <Footer/>
     </div>

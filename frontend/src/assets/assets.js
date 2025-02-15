@@ -10,6 +10,7 @@ import food8 from './hotel_food5.jpg';
 import food9 from './hotel_food6.jpg';
 import diningRoom from './hotel_dining.jpg';
 
+
 //Amenities
 import beachTopView from './hotel_beach_topview.jpg';
 import garden from './hotel_garden.jpg';
@@ -30,6 +31,9 @@ import landscape from './hotel_landscape.jpg';
 
 //Rooms
 import deluxeKing from './deluxe_king_bed.jpg';
+import deluxeKing1 from './deluxe_king_bed1.jpg';
+import deluxeKing2 from './deluxe_king_bed2.jpg';
+import deluxeKing3 from './deluxe_king_bed3.jpg';
 import deluxeSuite from './deluxe_bed.jpg';
 import deluxevicHar from './deluxe_victoria_harbour_bed.jpg';
 import clubdelVic from './club_deluxe_victoria_bed.jpg';
@@ -66,6 +70,9 @@ export const assets = {
   hotelBg,
   landscape,
   deluxeKing,
+  deluxeKing1,
+  deluxeKing2,
+  deluxeKing3,
   deluxeSuite,
   deluxevicHar,
   premierexeVic,

@@ -1,0 +1,91 @@
+// Color Theme
+:root {
+    --PrimaryColor: hsl(50, 100%, 91%);
+    --HoverColor: hsl(50, 100%, 81%);
+    --whiteColor: hsl(0, 0, 100%);
+    --blackColor: hsl(0, 0, 18%);
+    --LightDarkHover: hsla(0, 0%, 15%, 0.9);
+    --blackHover: hsla(0, 0%, 11%, 0.9);
+    --textColor: hsl(240, 1%, 48%);
+    --grayBG: hsl(240, 1%, 66%);
+    --grayText: rgb(190, 190, 190);
+    --whiteColorDeam: hsl(0, 0%, 93%);
+    --inputColor: hsl(330, 12%, 97%);
+    // box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.334);
+    // linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)
+    // linear-gradient(rgba(33, 33, 33, 0.522), rgba(33, 33, 33, 0.522))
+  }
+
+.room-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+  
+    .room-swiper {
+      width: 100vh;
+      height: 50vh;
+      margin-bottom: 20px;
+      
+      .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+  
+      .room-slide {
+        width: 400%;
+        height: 500px;  
+        object-fit: cover;
+        border-radius: 0px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        color: black;
+        opacity: 0.7;
+        transition: opacity 0.3s ease-in-out;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+  
+    .room-info {
+      text-align: center;
+      max-width: 800px;
+  
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+  
+      p {
+        font-size: 1.1rem;
+        color: #555;
+        line-height: 1.6;
+      }
+  
+      .back-button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #ff6600;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+  
+        &:hover {
+          background-color: #e55e00;
+        }
+      }
+    }
+  }
+  
+
+//*const room = Date.find((room) => room.id === parseInt(id)); *//

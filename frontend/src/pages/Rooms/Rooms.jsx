@@ -1,14 +1,13 @@
 import React from 'react';
 import '../../App.css';
 import RoomHeader from '../../components/RoomHeader/RoomHeader';
-//*import RoomContent from '../../components/RoomContent/RoomContent';*//
-import Navbar from '../../components/Navbar/Navbar';
+import RoomContent from '../../components/RoomContent/RoomContent';
+
 
 function Rooms() {
   return <div>
-    <Navbar />
     <RoomHeader />
-    <div className="room-content"></div>
+    <RoomContent />
     </div>
 }
 

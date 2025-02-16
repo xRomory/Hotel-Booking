@@ -12,7 +12,55 @@ const bgImages = [
   assets.hallway
 ];
 
+
 const RegistrationForm = () => {
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const [message, setMessage] = useState(""); 
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      first_name: formData.first_name.trim(),
+      last_name: formData.last_name.trim(),
+      username: formData.username.trim(),
+      email: formData.email.trim(),
+      password: formData.password,
+    };
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/users/register/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      const data = await response.json();
+      if (response.status === 201) {
+        setMessage("Registration Successful!");
+        setFormData({  first_name: "", last_name: "", username: "", email: "", password: ""  })
+      } else {
+        setMessage(data.detail || "Registration Failed");
+        console.error("Error:", data);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setMessage("An error occurred. Please try again.");
+    }
+  };
 
   const [currentBg, setCurrentBg] = useState(0);
 
@@ -43,26 +91,28 @@ const RegistrationForm = () => {
       </div>
 
       <div className="wrapper">
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <h1>Registration</h1>
+          {message && <p>{message}</p>}
+
           <div className="input-box">
-            <input type="text" placeholder='First Name' required />
+            <input type="text" name='first_name' placeholder='First Name' required value={formData.first_name} onChange={handleChange}/>
           </div>
 
           <div className="input-box">
-            <input type="text" placeholder='Last Name' required />
+            <input type="text" name='last_name' placeholder='Last Name' required value={formData.last_name} onChange={handleChange}/>
           </div>
 
           <div className="input-box">
-            <input type="text" placeholder='Username' required />
+            <input type="text" name='username' placeholder='Username' required value={formData.username} onChange={handleChange}/>
           </div>
 
           <div className="input-box">
-            <input type="text" placeholder='Email' required />
+            <input type="text" name='email' placeholder='Email' required value={formData.email} onChange={handleChange}/>
           </div>
 
           <div className="input-box">
-            <input type="password" placeholder='Password' required />
+            <input type="password" name='password' placeholder='Password' required value={formData.password} onChange={handleChange}/>
           </div>
 
           <button type='submit'>Register</button>

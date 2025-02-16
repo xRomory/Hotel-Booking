@@ -35,6 +35,9 @@ import deluxeKing1 from './deluxe_king_bed1.jpg';
 import deluxeKing2 from './deluxe_king_bed2.jpg';
 import deluxeKing3 from './deluxe_king_bed3.jpg';
 import deluxeSuite from './deluxe_bed.jpg';
+import deluxeSuite1 from './deluxe_bed1.jpg';
+import deluxeSuite2 from './deluxe_bed2.jpg';
+import deluxeSuite3 from './deluxe_bed3.jpg';
 import deluxevicHar from './deluxe_victoria_harbour_bed.jpg';
 import clubdelVic from './club_deluxe_victoria_bed.jpg';
 import grandSeaview from './grand_seaview_bed.jpg';
@@ -74,6 +77,9 @@ export const assets = {
   deluxeKing2,
   deluxeKing3,
   deluxeSuite,
+  deluxeSuite1,
+  deluxeSuite2,
+  deluxeSuite3,
   deluxevicHar,
   premierexeVic,
   grandSeaview,

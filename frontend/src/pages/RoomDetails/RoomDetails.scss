@@ -31,7 +31,7 @@
 // Content Container (Appears After Scroll)
 .room-details-container {
     max-width: 2500px;
-    margin: 0 auto; // Creates spacing between image and content
+    margin: auto; // Creates spacing between image and content
     background-color: white;
     position: relative;
     z-index: 10;

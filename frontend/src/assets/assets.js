@@ -34,17 +34,39 @@ import deluxeKing from './deluxe_king_bed.jpg';
 import deluxeKing1 from './deluxe_king_bed1.jpg';
 import deluxeKing2 from './deluxe_king_bed2.jpg';
 import deluxeKing3 from './deluxe_king_bed3.jpg';
+
 import deluxeSuite from './deluxe_bed.jpg';
 import deluxeSuite1 from './deluxe_bed1.jpg';
 import deluxeSuite2 from './deluxe_bed2.jpg';
 import deluxeSuite3 from './deluxe_bed3.jpg';
+
 import deluxevicHar from './deluxe_victoria_harbour_bed.jpg';
-import clubdelVic from './club_deluxe_victoria_bed.jpg';
+import deluxeVicHar1 from './deluxe_victoria_harbour_bed1.jpg';
+import deluxeVicHar3 from './deluxe_victoria_harbour_bed3.jpg';
+
+import clubdelVic1 from './club_deluxe_victoria_bed1.jpeg';
+import clubdelVic2 from './club_deluxe_victoria_bed2.jpeg';
+import clubdelVic3 from './club_deluxe_victoria_bed3.jpeg';
+
 import grandSeaview from './grand_seaview_bed.jpg';
+import grandSeaview2 from './grand_seaview_bed2.jpg';
+import grandSeaview3 from './grand_seaview_bed3.jpg';
+
 import deluxevicharKing from './deluxe_victoria_harbour_king_bed.jpg';
+import deluxevicharKing1 from './deluxe_victoria_harbour_king_bed1.jpg';
+import deluxevicharKing2 from './deluxe_victoria_harbour_king_bed2.jpg';
+
 import deluxeseaKing from './deluxe_seaview_king_bed.jpg';
+import deluxeseaKing1 from './deluxe_seaview_king_bed1.jpg';
+import deluxeseaKing2 from './deluxe_seaview_king_bed2.jpg';
+
 import premierexeVic from './premier_executive_victoria_harbour_bed.jpg';
+import premierexeVic1 from './premier-executive3.jpg';
+
+
 import clubdelKing from './club_deluxe_king_bed.jpg';
+import clubdelKing2 from './club_deluxe_king_bed2.jpg';
+
 
 export const assets = {
   food,
@@ -81,10 +103,22 @@ export const assets = {
   deluxeSuite2,
   deluxeSuite3,
   deluxevicHar,
+  deluxeVicHar1,
+  deluxeVicHar3,
   premierexeVic,
+  premierexeVic1,
   grandSeaview,
+  grandSeaview2,
+  grandSeaview3,
   deluxevicharKing,
+  deluxevicharKing1,
+  deluxevicharKing2,
   deluxeseaKing,
+  deluxeseaKing1,
+  deluxeseaKing2,
   clubdelKing,
-  clubdelVic,
+  clubdelKing2,
+  clubdelVic1,
+  clubdelVic2,
+  clubdelVic3,
 }

@@ -47,6 +47,8 @@ const RoomDetails = () => {
         <p className="room-descripFull">{room.descripFull}</p>
 
         <div className="room-details">
+          <h2>Price</h2>
+            <p>Price starts from <strong>{room.price}</strong></p>
           <h2>Check-in</h2>
           <p>Check-in from <strong>{room.checkIn}</strong> – anytime</p>
 

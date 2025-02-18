@@ -23,15 +23,15 @@
 
 .room-slide {
     width: 100%;
-    height: 100vh; // Ensure it fills the whole screen
+    height: 100vh; 
     object-fit: cover; 
-    display: block;// Ensure it doesn’t get distorted
+    display: block;
 }
 
 // Content Container (Appears After Scroll)
 .room-details-container {
     max-width: 2500px;
-    margin: auto; // Creates spacing between image and content
+    margin: auto; 
     background-color: white;
     position: relative;
     z-index: 10;
@@ -40,28 +40,34 @@
 // Typography Adjustments
 .room-info {
     text-align: left;
-    width: 100%;
+    width: 800%;
     max-width: 800px;
+    flex-direction: column;
 }
 
 .room-info h1 {
+    font-family: 'Newsreader';
     font-size: 2.5rem;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    
 }
 
 .room-description {
+    font-family: 'Merriweather';
     font-size: 1.2rem;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 // Headings in Details
 .room-details h2 {
+    font-family: 'Newsreader';
     font-size: 1.5rem;
     margin-top: 20px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .room-details p {
+    font-family: 'Merriweather';
     font-size: 1rem;
     color: #555;
     margin-bottom: 10px;
@@ -73,8 +79,10 @@
 }
 
 .amenities-container h2 {
+    font-family: 'Newsreader';
     font-size: 1.5rem;
     margin-bottom: 10px;
+    font-weight: 500;
 }
 
 .amenities-container ul {
@@ -94,7 +102,7 @@
     width: 100%;
     max-width: 300px;
     padding: 15px;
-    background-color: #4CAF50;
+    background-color: #6d5743;
     color: white;
     font-size: 1.2rem;
     text-align: center;
@@ -106,13 +114,13 @@
 }
 
 .book-now-button:hover {
-    background-color: #45a049;
+    background-color: #58523e;
 }
 
 // Responsive Fix for Mobile
 @media (max-width: 768px) {
     .room-swiper {
-        height: 80vh; // Slightly smaller on mobile
+        height: 80vh; 
     }
 
     .room-slide {

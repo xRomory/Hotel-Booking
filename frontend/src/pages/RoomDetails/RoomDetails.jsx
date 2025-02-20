@@ -1,3 +1,4 @@
+import BookNowButton from "../../pages/BookNowButton/BookNowButton";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Data } from "../../components/RoomContent/RoomContent";
@@ -81,7 +82,7 @@ const RoomDetails = () => {
         </div>
 
         {/* Book Now Button */}
-        <button className="book-now-button" data-aos="zoom-in">Book Now</button>
+        <BookNowButton room={room} /> 
       </div>
     </div>
   );

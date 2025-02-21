@@ -1,13 +1,14 @@
-// import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import FoodPage from './pages/Foods/Foods';
-import HotelLoginPage from './pages/Login/HotelLoginPage';
-import HotelAmenities from './pages/HotelAmenities/HotelAmenities';
-import HotelRegistration from './pages/Registration/HotelRegistration';
+// import HotelRoom from './pages/Rooms/Rooms'
+// import HotelResorts from './components/HotelResorts/HotelResorts';
+// import About from './components/About/About';
+
 
 function App() {
   return(
@@ -26,10 +27,8 @@ const MainLayout = () => {
       <Routes>
         <Route path="/" element={<Home/>}/>
         {/* <Route path='/Rooms' element={} */}
+        <Route path="/rooms" element={<RoomPage/>}/>
         <Route path="/Foods" element={<FoodPage/>} />
-        <Route path="/Login" element={<HotelLoginPage/>} />
-        <Route path="/Registration" element={<HotelRegistration/>} />
-        <Route path="/HotelAmenities" element={<HotelAmenities/>} />
       </Routes>
       {!hideNavbarFooter && <Footer />}
     </div>

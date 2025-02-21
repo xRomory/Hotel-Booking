@@ -28,7 +28,7 @@ const Data = [
     id: 3,
     imgSrc: assets.poolside2,
     amenitiesTitle: 'Pool Side',
-    location: 'Center Wing',
+    cation: 'Center Wing',
     description: 'Lorem Ipsum'
   },
 

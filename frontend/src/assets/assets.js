@@ -36,6 +36,13 @@ import hotelBg6 from './hotel_bg6.jpg'
 import hotelBg7 from './hotel_bg7.jpg'
 import landscape from './hotel_landscape.jpg';
 
+//Beach Amenities
+import beach from './hotel_beach.jpg'
+import beach1 from './hotel_beach1.jpg'
+import beach2 from './hotel_beach2.jpg'
+import beach3 from './hotel_beach3.jpg'
+import beach4 from './hotel_beach4.jpg'
+
 //Rooms
 import deluxeKing from './deluxe_king_bed.jpg';
 import deluxeKing1 from './deluxe_king_bed1.jpg';

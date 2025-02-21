@@ -5,10 +5,12 @@ import RoomContent from '../../components/RoomContent/RoomContent';
 
 
 function Rooms() {
-  return <div>
-    <RoomHeader />
-    <RoomContent />
+  return (
+    <div>
+      <RoomHeader />
+      <RoomContent />
     </div>
+  )
 }
 
 export default Rooms;

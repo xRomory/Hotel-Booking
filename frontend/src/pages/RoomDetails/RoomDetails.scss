@@ -1,0 +1,188 @@
+// Color Theme
+:root {
+    --PrimaryColor: hsl(50, 100%, 91%);
+    --HoverColor: hsl(50, 100%, 81%);
+    --whiteColor: hsl(0, 0, 100%);
+    --blackColor: hsl(0, 0%, 18%);
+    --LightDarkHover: hsla(0, 0%, 15%, 0.9);
+    --blackHover: hsla(0, 0%, 11%, 0.9);
+    --textColor: hsl(240, 1%, 48%);
+    --grayBG: hsl(240, 1%, 66%);
+    --grayText: rgb(190, 190, 190);
+    --whiteColorDeam: hsl(0, 0%, 93%);
+    --inputColor: hsl(330, 12%, 97%);
+
+    --darkBrown: #4f3e2e;
+    --lightBrown: #9c7b5a;
+}
+
+// Full-Screen Cover Image
+.room-swiper {
+    margin-top: 20px;
+    width: 100%;
+    height: 100vh; 
+    position: relative;
+    overflow: hidden;
+    background-color: var((--whiteColor));
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--whiteColor) !important;
+}
+.room-slide {
+    width: 100%;
+    height: 100vh; 
+    object-fit: cover; 
+    display: block;
+}
+
+// Content Container (Appears After Scroll)
+.room-details-container {
+    max-width: 1200px; 
+    margin: auto;
+    padding: 40px 20px;
+    background-color: var(--whiteColor);
+    position: relative;
+    z-index: 10;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+// Typography Adjustments
+.room-info {
+    text-align: left;
+    max-width: 800px;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.room-info h1 {
+    font-family: 'Newsreader', serif;
+    font-size: 2.8rem;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    color: var(--blackColor);
+}
+
+.room-descripFull {
+    font-family: 'Merriweather', serif;
+    font-size: 1.1rem;
+    color: var(--textColor);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+// Headings in Details
+.room-details h2 {
+    font-family: 'Newsreader', serif;
+    font-size: 1.8rem;
+    margin-top: 30px;
+    font-weight: 600;
+    color: var(--blackColor);
+    border-bottom: 2px solid var(--darkBrown);
+    padding-bottom: 5px;
+}
+
+.room-details p {
+    font-family: 'Merriweather', serif;
+    font-size: 1.1rem;
+    color: var(--textColor);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+// Amenities Styling
+.amenities-container {
+    background-color: #f3ebc8; // Soft pastel yellow
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+}
+
+.amenities-container h2 {
+    font-family: 'Newsreader', serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--lightBrown); 
+    margin-bottom: 15px;
+}
+
+.amenities-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.amenities-container li {
+    font-size: 1.1rem;
+    font-family: 'Merriweather', serif;
+    color: #333;
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.amenities-container li::before {
+    color: #6d5743; 
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+
+// Button Styling
+.book-now-button {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    padding: 15px;
+    background-color: #8d7a69;
+    color: var(--whiteColor);
+    font-size: 1.2rem;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    margin: 30px auto;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+    font-weight: 600;
+}
+
+.book-now-button:hover {
+    background-color: var(--lightBrown);
+    transform: scale(1.05);
+}
+
+// Responsive Fix for Mobile
+@media (max-width: 768px) {
+    .room-swiper {
+        height: 80vh; 
+    }
+
+    .room-slide {
+        height: 80vh;
+    }
+
+    .room-details-container {
+        padding: 20px;
+    }
+
+    .room-info h1 {
+        font-size: 2rem;
+    }
+
+    .room-descripFull {
+        font-size: 1rem;
+    }
+
+    .amenities-container h2 {
+        font-size: 1.4rem;
+    }
+
+    .book-now-button {
+        font-size: 1rem;
+    }
+}

@@ -1,7 +1,6 @@
 import BookNowButton from "../../pages/BookNowButton/BookNowButton";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Data } from "../../components/RoomContent/RoomContent";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -10,8 +9,7 @@ import "swiper/css/navigation";
 import "./RoomDetails.scss";
 
 // Import icons
-// import { BiUser, BiBed, BiWifi, BiCoffee, BiCar, BiSpa } from "react-icons/bi"; 
-import { MdOutlinePets, MdChildCare, MdOutlineLocalParking } from "react-icons/md";
+import { MdOutlinePets } from "react-icons/md";
 import { FaCheckCircle } from "react-icons/fa";
 
 // Import AOS and its styles
@@ -20,18 +18,38 @@ import "aos/dist/aos.css";
 
 const RoomDetails = () => {
   const { id } = useParams();
-  const room = Data.find((r) => r.id === parseInt(id));
+  const [room, setRoom] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Initialize AOS
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
-  }, []);
 
-  if (!room) {
-    return <h2>Room not found</h2>;
-  }
+    const fetchRoomDetails = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/rooms/${id}/`);
+        if (!response.ok) {
+          throw new Error("Room not found");
+        }
+        const data = await response.json();
+        setRoom(data);
 
-  const images = [room.imgSrc, ...(room.extraImages || [])];
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRoomDetails();
+  }, [id]);
+
+  if (loading) return <h2>Loading...</h2>
+  if (error) return <h2>{error}</h2>;
+  if (!room) return <h2>Room not found</h2>;
+
+  const images = room.imgSrc ? [room.imgSrc, ...(room.extraImages || [])] : [];
 
   return (
     <div className="room-details-container" data-aos="fade-up">
@@ -73,17 +91,17 @@ const RoomDetails = () => {
         <div className="amenities-container" data-aos="fade-up">
           <h2>Amenities</h2>
           <ul className="amenities-list">
-            {room.amenities.map((amenity, index) => (
+            {room.amenities?.map((amenity, index) => (
               <li key={index}>
                 <FaCheckCircle /> {amenity}
               </li>
             ))}
           </ul>
         </div>
-
-        {/* Book Now Button */}
-        <BookNowButton room={room} /> 
       </div>
+
+      {/* Book Now Button */}
+      <BookNowButton room={room} />
     </div>
   );
 };

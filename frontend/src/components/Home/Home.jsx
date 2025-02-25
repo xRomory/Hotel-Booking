@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './Home.scss'
 import HotelDatePicker from '../HotelDatePicker/HotelDatePicker'
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -16,19 +17,21 @@ const Home = () => {
           </p>
 
           <button className="btn">
-            <a href="#">Explore</a>
+            <Link to="/Rooms">
+              Explore
+            </Link>
           </button>
         </div>
 
         <div className="home-card grid">
           <div className="location-div">
             <label htmlFor="location">Location</label>
-            <input type="text" placeholder='Choose your Magical Place'/>
+            <input type="text" placeholder='Choose your Magical Place' />
           </div>
 
           <div className="schedule-div">
             <label htmlFor="schedule">Schedule</label>
-            <HotelDatePicker/>
+            <HotelDatePicker />
           </div>
 
           {/* <div className="price-div">

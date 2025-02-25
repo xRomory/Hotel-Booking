@@ -36,12 +36,6 @@ function navbar() {
               <span className='brand-name'>PSEUBOMOTEL</span>
             </h1>
           </Link>
-          {/* <a href="" className="logo">
-            <h1 className='flex'>
-              <FaHotel className='icon'/>
-              <span className='brand-name'>PSEUBOMOTEL</span>
-            </h1>
-          </a> */}
         </div>
 
         <div className={active}>
@@ -63,9 +57,9 @@ function navbar() {
               </a>
             </li>
             <li className="nav-item">
-              <Link to="/HotelAmenities" className='nav-link'>
+              <a href="#" className="nav-link">
                 Hotel Amenities
-              </Link>
+              </a>
             </li>
             <li className="nav-item">
               <a href="#" className="nav-link">

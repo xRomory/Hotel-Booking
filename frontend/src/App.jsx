@@ -8,7 +8,6 @@ import FoodPage from './pages/Foods/Foods';
 import RoomPage from './pages/Rooms/Rooms';
 import RoomDetailsPage from './pages/RoomDetails/RoomDetails';
 import HotelLoginPage from './pages/Login/HotelLoginPage';
-import HotelAmenities from './pages/HotelAmenities/HotelAmenities';
 import HotelRegistration from './pages/Registration/HotelRegistration';
 // import HotelResorts from './components/HotelResorts/HotelResorts';
 // import About from './components/About/About';
@@ -34,8 +33,7 @@ const MainLayout = () => {
         <Route path="/Foods" element={<FoodPage/>} />
         <Route path="/Login" element={<HotelLoginPage/>} />
         <Route path="/Registration" element={<HotelRegistration/>} />
-        <Route path="/HotelAmenities" element={<HotelAmenities/>} />
-        <Route path ="Rooms/:id" element ={<RoomDetailsPage />} />
+        <Route path ="/Rooms/:id" element ={<RoomDetailsPage />} />
       </Routes>
       {!hideNavbarFooter && <Footer />}
     </div>

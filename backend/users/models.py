@@ -5,7 +5,7 @@ from django.db import models
 class CustomUser (AbstractUser):
   first_name = models.CharField(max_length=50)
   last_name = models.CharField(max_length=20)
-  # username = models.CharField(max_length=50, unique=True)
+  username = models.CharField(max_length=50, unique=True)
   email = models.EmailField(unique=True)
 
   groups = models.ManyToManyField(Group, related_name="customer_set", blank=True)

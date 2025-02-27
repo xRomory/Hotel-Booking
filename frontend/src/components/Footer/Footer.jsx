@@ -46,6 +46,10 @@ const Footer = () => {
             <a href="#">Hotel Amenities</a>
           </li>
           <li>
+            <Link to="/Foods">Food</Link>
+            {/* <a href="#">Home</a> */}
+          </li>
+          <li>
             <a href="#">About Us</a>
           </li>
         </div>

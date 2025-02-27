@@ -1,3 +1,4 @@
+// Foods
 import food from './hotel_dinner2.jpg';
 import food1 from './hotel_dinner3.jpg';
 import food2 from './hotel_dinner4.jpg';
@@ -9,7 +10,6 @@ import food7 from './hotel_food4.jpg';
 import food8 from './hotel_food5.jpg';
 import food9 from './hotel_food6.jpg';
 import diningRoom from './hotel_dining.jpg';
-
 
 //Amenities
 import beachTopView from './hotel_beach_topview.jpg';
@@ -63,10 +63,8 @@ import deluxeseaKing2 from './deluxe_seaview_king_bed2.jpg';
 import premierexeVic from './premier_executive_victoria_harbour_bed.jpg';
 import premierexeVic1 from './premier-executive3.jpg';
 
-
 import clubdelKing from './club_deluxe_king_bed.jpg';
 import clubdelKing2 from './club_deluxe_king_bed2.jpg';
-
 
 export const assets = {
   food,

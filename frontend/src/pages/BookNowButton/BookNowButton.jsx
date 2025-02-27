@@ -12,6 +12,7 @@ const BookNowButton = ({ room }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [bookingDetails, setBookingDetails] = useState({});
   const [referenceNumber, setReferenceNumber] = useState("");
+  const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -25,9 +26,10 @@ const BookNowButton = ({ room }) => {
     AOS.init({ duration: 1000, once: true });
   }, []);
 
+  
   useEffect(() => {
     if (selectedDates[0] && selectedDates[1] && room?.price) {
-      const priceString = room.price.split("/")[0]; 
+      const priceString = room.price.split("/")[0];
       const numericPrice = parseFloat(priceString);
       const checkInDate = new Date(selectedDates[0]);
       const checkOutDate = new Date(selectedDates[1]);
@@ -40,15 +42,63 @@ const BookNowButton = ({ room }) => {
     return `HTL-${Math.floor(100000 + Math.random() * 900000)}`;
   };
 
+ 
+  const validateStep2 = () => {
+    let errs = {};
+    if (!formData.firstName.trim()) {
+      errs.firstName = "First name is required.";
+    } else if (/\d/.test(formData.firstName)) {
+      errs.firstName = "First name should not contain numbers.";
+    }
+    if (!formData.lastName.trim()) {
+      errs.lastName = "Last name is required.";
+    } else if (/\d/.test(formData.lastName)) {
+      errs.lastName = "Last name should not contain numbers.";
+    }
+    if (!formData.email.trim()) {
+      errs.email = "Email is required.";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errs.email = "Email is invalid.";
+    }
+    if (!formData.contact.trim()) {
+      errs.contact = "Contact number is required.";
+    } else if (!/^\d+$/.test(formData.contact)) {
+      errs.contact = "Contact must contain only digits.";
+    }
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
+
+  const validateStep3 = () => {
+    let errs = {};
+    if (!formData.cardNumber.trim()) {
+      errs.cardNumber = "Card number is required.";
+    } else if (!/^\d{12,16}$/.test(formData.cardNumber.trim())) {
+      errs.cardNumber = "Card number must be 12 to 16 digits.";
+    }
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
+  };
+
+  const handleNextStep2 = () => {
+    if (validateStep2()) {
+      setErrors({});
+      setStep(3);
+    }
   };
 
   const handleConfirmBooking = (e) => {
     e.preventDefault();
+    if (!validateStep3()) return;
     const refNum = generateReferenceNumber();
+    const bookingDate = new Date().toDateString();
     setBookingDetails({
       referenceNumber: refNum,
+      bookingDate: bookingDate,
       roomName: room?.roomsTitle || "Not specified",
       checkIn: selectedDates[0]?.toDateString() || "Not selected",
       checkOut: selectedDates[1]?.toDateString() || "Not selected",
@@ -68,6 +118,7 @@ const BookNowButton = ({ room }) => {
         onClick={() => {
           setShowModal(true);
           setStep(1);
+          setErrors({});
         }}
       >
         Book Now
@@ -113,6 +164,7 @@ const BookNowButton = ({ room }) => {
                     onChange={handleChange}
                     required
                   />
+                  {errors.firstName && <span className="error">{errors.firstName}</span>}
                 </label>
                 <label>
                   Last Name:
@@ -123,6 +175,7 @@ const BookNowButton = ({ room }) => {
                     onChange={handleChange}
                     required
                   />
+                  {errors.lastName && <span className="error">{errors.lastName}</span>}
                 </label>
                 <label>
                   Email:
@@ -133,6 +186,7 @@ const BookNowButton = ({ room }) => {
                     onChange={handleChange}
                     required
                   />
+                  {errors.email && <span className="error">{errors.email}</span>}
                 </label>
                 <label>
                   Contact Number:
@@ -143,8 +197,9 @@ const BookNowButton = ({ room }) => {
                     onChange={handleChange}
                     required
                   />
+                  {errors.contact && <span className="error">{errors.contact}</span>}
                 </label>
-                <button className="next-button" onClick={() => setStep(3)}>
+                <button className="next-button" onClick={handleNextStep2}>
                   Next
                 </button>
               </div>
@@ -162,6 +217,7 @@ const BookNowButton = ({ room }) => {
                     onChange={handleChange}
                     required
                   />
+                  {errors.cardNumber && <span className="error">{errors.cardNumber}</span>}
                 </label>
                 <button type="submit" className="confirm-button">
                   Confirm Booking
@@ -184,6 +240,9 @@ const BookNowButton = ({ room }) => {
                 <strong>Reference Number:</strong> {referenceNumber}
               </p>
               <p>
+                <strong>Booking Date:</strong> {bookingDetails.bookingDate}
+              </p>
+              <p>
                 <strong>Room:</strong> {bookingDetails.roomName}
               </p>
               <p>
@@ -199,10 +258,7 @@ const BookNowButton = ({ room }) => {
                 <strong>Booked by:</strong> {bookingDetails.customerName}
               </p>
             </div>
-            <button
-              className="close-receipt"
-              onClick={() => setShowConfirmation(false)}
-            >
+            <button className="close-receipt" onClick={() => setShowConfirmation(false)}>
               Close
             </button>
           </div>

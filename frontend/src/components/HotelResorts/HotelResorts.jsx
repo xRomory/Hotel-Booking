@@ -79,11 +79,9 @@ const HotelResorts = () => {
                     <img src={imgSrc} alt="Image Title" />
                     <div className="overlay-info">
                       <h3>{amenitiesTitle}</h3>
-                
                       <p>
                         {description}
                       </p>
-
                       <BsArrowRightShort className='icon'/>
                     </div>
                   </div>

@@ -18,6 +18,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>}/>
+        {/* <Route path='/Rooms' element={} */}
         <Route path="/rooms" element={<RoomPage/>}/>
         <Route path="/Foods" element={<FoodPage/>} />
         <Route path ="rooms/:id" element ={<RoomDetailsPage />} />

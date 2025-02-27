@@ -32,7 +32,7 @@
     transform: scale(0.9);
     animation: fadeInScale 0.3s ease-in-out forwards;
 
-    .step-1, .step-2 {
+    .step-1, .step-2, .step-3 {
       label {
         display: block;
         margin: 10px 0;
@@ -45,6 +45,10 @@
           border: 1px solid #ddd;
           border-radius: 6px;
         }
+      }
+
+      .confirm-button {
+        font-size: 1rem !important;
       }
 
       .next-button, .confirm-button {
@@ -67,6 +71,28 @@
         &:hover {
           background: #218838;
         }
+      }
+    }
+
+    .back-button {
+      margin: auto;
+      color: black;
+      width: 10rem;
+      padding: 12px 20px;
+      border: none;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.3s;
+      background: #ffd70f;
+      font-family: Oswald;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .1cap;
+
+      &:hover {
+        background: #e6c62a;
       }
     }
 

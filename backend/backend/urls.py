@@ -22,8 +22,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('users/', include('users.urls')),
-    path('api/', include('hotel_rooms.urls'))
+    # path('api/users/', include('users.urls')),
+    path('api/rooms/', include('hotel_rooms.urls')),
+    path('api/bookings/', include('booking_rooms.urls')),
 ]
 
 if settings.DEBUG:

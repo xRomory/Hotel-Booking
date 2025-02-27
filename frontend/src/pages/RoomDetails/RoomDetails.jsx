@@ -28,7 +28,7 @@ const RoomDetails = () => {
 
     const fetchRoomDetails = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/rooms/${id}/`);
+        const response = await fetch(`http://127.0.0.1:8000/api/rooms/room-details/${id}/`);
         if (!response.ok) {
           throw new Error("Room not found");
         }

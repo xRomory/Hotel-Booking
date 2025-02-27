@@ -8,14 +8,14 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const RoomContent = () => {
   const navigate = useNavigate()
-  const handleViewDetails = (id) => {
-    navigate(`/rooms/${id}`);
-  }
+  // const handleViewDetails = (id) => {
+  //   navigate(`/rooms/${id}`);
+  // }
 
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/rooms/').then(response => {
+    axios.get('http://127.0.0.1:8000/api/rooms/room-details').then(response => {
       setRooms(response.data);
     }).catch(error => {
       console.error("Error fetching data:", error);

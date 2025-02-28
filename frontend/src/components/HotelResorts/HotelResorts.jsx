@@ -74,7 +74,7 @@ const HotelResorts = () => {
           {
             Data.map(({id, imgSrc, amenitiesTitle, location, description}) => {
               return (
-                <div className="single-amenities">
+                <div className="single-amenities" key={id}>
                   <div className="amenities-image">
                     <img src={imgSrc} alt="Image Title" />
                     <div className="overlay-info">

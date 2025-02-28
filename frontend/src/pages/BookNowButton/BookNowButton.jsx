@@ -30,6 +30,13 @@ const BookNowButton = ({ room }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const formatDate = (date) => {
+    if (!date) return null;
+    return date.getFullYear() + "-" + 
+           String(date.getMonth() + 1).padStart(2, "0") + "-" + 
+           String(date.getDate()).padStart(2, "0");
+  };
+
   const handleConfirmBooking = async (e) => {
     e.preventDefault();
 
@@ -39,12 +46,8 @@ const BookNowButton = ({ room }) => {
       last_name: formData.lastName,
       email: formData.email,
       contact_number: formData.contact,
-      check_in: selectedDates[0]
-        ? selectedDates[0].toISOString().split("T")[0]
-        : null,
-      check_out: selectedDates[1]
-        ? selectedDates[1].toISOString().split("T")[0]
-        : null,
+      check_in: formatDate(new Date(selectedDates[0])),
+      check_out: formatDate(new Date(selectedDates[1])),
       status: "reserved",
     };
 
@@ -104,7 +107,7 @@ const BookNowButton = ({ room }) => {
       setBookingDetails({
         ...bookingData,
         roomName: room?.roomsTitle,
-        totalPayment: room?.price,
+        total_payment: room?.price,
         customerName: `${formData.firstName} ${formData.lastName}`,
       });
 
@@ -332,13 +335,13 @@ const BookNowButton = ({ room }) => {
               <strong>Room:</strong> {bookingDetails.roomName}
             </p>
             <p>
-              <strong>Check-in:</strong> {bookingDetails.checkIn}
+              <strong>Check-in:</strong> {bookingDetails.check_in}
             </p>
             <p>
-              <strong>Check-out:</strong> {bookingDetails.checkOut}
+              <strong>Check-out:</strong> {bookingDetails.check_out}
             </p>
             <p>
-              <strong>Total Payment:</strong> {bookingDetails.totalPayment}
+              <strong>Total Payment:</strong> {bookingDetails.total_payment}
             </p>
             <p>
               <strong>Booked by:</strong> {bookingDetails.customerName}

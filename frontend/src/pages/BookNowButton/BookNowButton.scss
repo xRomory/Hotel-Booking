@@ -32,13 +32,16 @@
     transform: scale(0.9);
     animation: fadeInScale 0.3s ease-in-out forwards;
 
-    .step-1, .step-2, .step-3 {
+    .step-1,
+    .step-2,
+    .step-3 {
       label {
         display: block;
         margin: 10px 0;
         font-weight: bold;
 
-        input, select {
+        input,
+        select {
           width: 100%;
           padding: 10px;
           margin-top: 5px;
@@ -47,11 +50,8 @@
         }
       }
 
+      .next-button,
       .confirm-button {
-        font-size: 1rem !important;
-      }
-
-      .next-button, .confirm-button {
         background: #28a745;
         margin: auto;
         color: white;
@@ -64,7 +64,7 @@
         margin-top: 15px;
         transition: 0.3s;
         font-family: Oswald;
-        letter-spacing: .1cap;
+        letter-spacing: 0.1cap;
         text-transform: uppercase;
         font-weight: 500;
 
@@ -89,7 +89,7 @@
       font-family: Oswald;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: .1cap;
+      letter-spacing: 0.1cap;
 
       &:hover {
         background: #e6c62a;
@@ -111,7 +111,7 @@
       font-family: Oswald;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: .1cap;
+      letter-spacing: 0.1cap;
 
       &:hover {
         background: #c82333;
@@ -120,8 +120,36 @@
     }
   }
 }
-  
+
+.close-confirmation {
+  background: #28a745;
+  margin: auto;
+  color: white;
+  border: none;
+  width: 10rem;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.3s;
+  font-family: Oswald;
+  letter-spacing: 0.1cap;
+  text-transform: uppercase;
+  font-weight: 500;
+
+  &:hover {
+    background: #218838;
+  }
+}
+
 @keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

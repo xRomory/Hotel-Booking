@@ -1,0 +1,236 @@
+/* Colors */
+:root {
+  --PrimaryColor: hsl(50, 100%, 91%);
+  --HoverColor: hsl(50, 100%, 81%);
+  --whiteColor: hsl(0, 0, 100%);
+  --blackColor: hsl(0, 0, 18%);
+  --LightDarkHover: hsla(0, 0%, 15%, 0.9);
+  --blackHover: hsla(0, 0%, 11%, 0.9);
+  --textColor: hsl(240, 1%, 48%);
+  --grayBG: hsl(0, 0%, 96%);
+  --grayText: rgb(190, 190, 190);
+  --whiteColorDeam: hsl(0, 0%, 93%);
+  --inputColor: hsl(330, 12%, 97%);
+}
+
+.navbar-section {
+  .header {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // background: var(--blackHover);
+    background: transparent;
+    width: 100%;
+    padding: 1rem;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(209, 209, 209, 0.904);
+
+    // Hotel logo and brand name
+    .logo-div {
+      .logo {
+        color: var(--PrimaryColor);
+        font-weight: 500;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        // text-align: center;
+
+        .brand-name {
+          padding: 10px 5px 0;
+          font-family: "Merriweather";
+          font-size: 25px;
+          font-weight: 900;
+          color: white;
+        }
+      }
+
+      .icon {
+        font-size: 30x;
+      }
+    }
+
+    .navbar {
+      .nav-lists {
+        .nav-item {
+          padding: 0 1rem;
+          // color: var(--PrimaryColor);
+
+          .nav-link {
+            color: var(--PrimaryColor);
+          }
+        }
+      }
+    }
+
+    // Responsive Web Design for 768px
+    @media screen and (max-width: 1100px) {
+      .logo-div {
+        margin: auto;
+      }
+      .navbar {
+        background: var(--grayBG);
+        position: absolute;
+        height: max-content;
+        padding: 1rem;
+        width: 100%;
+        top: 0;
+        left: -500%;
+        box-shadow: 0 2px 4px rgba(209, 209, 209, 0.904);
+        transition: 0.5 ease;
+        z-index: 1000;
+
+        // Menu such as Foods, pricing and such
+        .nav-lists {
+          flex-direction: column;
+          justify-content: center;
+          width: 100%;
+          margin: auto;
+
+          .nav-item {
+            padding: 0.5rem 0;
+
+            .nav-link {
+              font-size: 1rem;
+              font-weight: 400;
+              letter-spacing: 0.15cap;
+              color: var(--blackColor);
+
+              &:hover {
+                color: var(--textColor);
+              }
+            }
+          }
+
+          // Login & Registration buttons
+          .header-btn {
+            flex-direction: column;
+
+            .btn {
+              border-radius: 0;
+              margin-top: 1rem;
+              width: 120px;
+
+              &:hover {
+                background: var(--LightDarkHover);
+              }
+
+              a {
+                font-weight: 700;
+                text-transform: uppercase;
+              }
+            }
+
+            .user-btn {
+              color: #000;
+            }
+          }
+        }
+
+        .logout-btn {
+          background: none;
+          border: 0.5px solid var(--blackColor);
+
+          &:hover {
+            background: var(--HoverColor);
+            border: 1px solid #000;
+
+            a {
+              color: #000;
+            }
+          }
+        }
+
+        .close-navbar {
+          position: absolute;
+          top: 1rem;
+          right: 1.5rem;
+          color: var(--blackColor);
+
+          &:hover .icon {
+            color: var(--blackHover);
+          }
+        }
+      }
+
+      .toggle-navbar-menu {
+        .icon {
+          color: white;
+
+          &:hover {
+            color: var(--PrimaryColor);
+          }
+        }
+      }
+
+      .active-navbar {
+        background: white;
+        left: 0;
+      }
+    }
+  }
+
+  .active-header {
+    background: var(--blackHover);
+    box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.334);
+  }
+}
+
+@media screen and (min-width: 1101px) {
+  .navbar-section {
+    .toggle-navbar-menu,
+    .close-navbar {
+      display: none;
+    }
+
+    .header {
+      padding: 1.5rem 2rem;
+
+      .navbar {
+        .nav-lists {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: row;
+
+          .nav-item {
+            .nav-link {
+              padding: 0 0.45rem;
+              font-size: 0.9rem;
+              font-weight: 400;
+
+              &:hover {
+                color: var(--HoverColor);
+              }
+            }
+          }
+
+          .btn {
+            margin-left: 1rem;
+            border-radius: 0;
+            width: 110px;
+            text-transform: uppercase;
+
+            a {
+              font-family: "Oswald";
+              font-weight: 500;
+              letter-spacing: 0.08cap;
+            }
+          }
+
+          .reg-btn {
+            &:hover {
+              background: var(--blackHover);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .header {
+    padding: 1rem 0.8rem;
+  }
+}

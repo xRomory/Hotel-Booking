@@ -11,7 +11,6 @@ const BookNowButton = ({ room }) => {
   const [totalPayment, setTotalPayment] = useState(0);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [bookingDetails, setBookingDetails] = useState({});
-  const [referenceNumber, setReferenceNumber] = useState("");
   const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
@@ -20,6 +19,8 @@ const BookNowButton = ({ room }) => {
     email: "",
     contact: "",
     cardNumber: "",
+    cardholder_first_name: "",
+    cardholder_last_name: ""
   });
 
   useEffect(() => {
@@ -38,9 +39,6 @@ const BookNowButton = ({ room }) => {
     }
   }, [selectedDates, room]);
 
-  const generateReferenceNumber = () => {
-    return `HTL-${Math.floor(100000 + Math.random() * 900000)}`;
-  };
 
  
   const validateStep2 = () => {
@@ -71,18 +69,39 @@ const BookNowButton = ({ room }) => {
 
   const validateStep3 = () => {
     let errs = {};
+  
+    // Validate Cardholder First Name
+    if (!formData.cardholder_first_name.trim()) {
+      errs.cardholder_first_name = "Cardholder first name is required.";
+    } else if (!/^[A-Za-z\s]+$/.test(formData.cardholder_first_name)) {
+      errs.cardholder_first_name = "First name should contain only letters.";
+    }
+  
+    // Validate Cardholder Last Name
+    if (!formData.cardholder_last_name.trim()) {
+      errs.cardholder_last_name = "Cardholder last name is required.";
+    } else if (!/^[A-Za-z\s]+$/.test(formData.cardholder_last_name)) {
+      errs.cardholder_last_name = "Last name should contain only letters.";
+    }
+  
+    // Validate Card Number
     if (!formData.cardNumber.trim()) {
       errs.cardNumber = "Card number is required.";
     } else if (!/^\d{12,16}$/.test(formData.cardNumber.trim())) {
       errs.cardNumber = "Card number must be 12 to 16 digits.";
     }
+  
     setErrors(errs);
+    console.log("Validation Errors:", errs);
+    
     return Object.keys(errs).length === 0;
   };
+  
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  
 
   const handleNextStep2 = () => {
     if (validateStep2()) {
@@ -94,18 +113,17 @@ const BookNowButton = ({ room }) => {
   const handleConfirmBooking = (e) => {
     e.preventDefault();
     if (!validateStep3()) return;
-    const refNum = generateReferenceNumber();
     const bookingDate = new Date().toDateString();
+
     setBookingDetails({
-      referenceNumber: refNum,
       bookingDate: bookingDate,
       roomName: room?.roomsTitle || "Not specified",
       checkIn: selectedDates[0]?.toDateString() || "Not selected",
       checkOut: selectedDates[1]?.toDateString() || "Not selected",
       totalPayment: totalPayment > 0 ? `${totalPayment} PHP` : "N/A",
       customerName: `${formData.firstName} ${formData.lastName}`,
+      cardholderName: `${formData.cardholder_first_name} ${formData.cardholder_last_name}`,
     });
-    setReferenceNumber(refNum);
     setShowModal(false);
     setShowConfirmation(true);
   };
@@ -209,6 +227,28 @@ const BookNowButton = ({ room }) => {
               <form className="step-3" onSubmit={handleConfirmBooking}>
                 <h3>Step 3: Payment Details</h3>
                 <label>
+                  Cardholder First Name:
+                  <input
+                    type="text"
+                    name="cardholder_first_name"
+                    value={formData.cardholder_first_name}
+                    onChange={handleChange}
+                    required
+                  />
+                  {errors.cardholder_first_name && <span className="error">{errors.cardholder_first_name}</span>}
+                </label>
+                <label>
+                  Cardholder Last Name:
+                  <input
+                    type="text"
+                    name="cardholder_last_name"
+                    value={formData.cardholder_last_name}
+                    onChange={handleChange}
+                    required
+                  />
+                  {errors.cardholder_last_name && <span className="error">{errors.cardholder_last_name}</span>}
+                </label>
+                <label>
                   Card Number:
                   <input
                     type="text"
@@ -236,9 +276,6 @@ const BookNowButton = ({ room }) => {
           <div className="receipt-content">
             <h2>Hotel Booking Receipt</h2>
             <div className="receipt-details">
-              <p>
-                <strong>Reference Number:</strong> {referenceNumber}
-              </p>
               <p>
                 <strong>Booking Date:</strong> {bookingDetails.bookingDate}
               </p>

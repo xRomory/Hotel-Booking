@@ -1,7 +1,8 @@
 // import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css'
-import Navbar from './components/Navbar/Navbar';
+// import Navbar from './components/Navbar/Navbar';
+import LoginNavbar from './components/LoginNavbar/LoginNavbar';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import FoodPage from './pages/Foods/Foods';
@@ -25,7 +26,7 @@ const MainLayout = () => {
   return (
     <div className='App'>
 
-      {!hideNavbarFooter && <Navbar />}
+      {!hideNavbarFooter && <LoginNavbar />}
       <Routes>
         <Route path="/" element={<Home/>}/>
         {/* <Route path='/Rooms' element={} */}

@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from hotel_rooms.models import HotelRoom
+from users.models import CustomUser
 
 # Create your models here.
 
@@ -14,6 +15,7 @@ class RoomBooking(models.Model):
     ('reserved', 'Reserved')
   ]
 
+  customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
   room = models.ForeignKey(HotelRoom, on_delete=models.CASCADE)
   first_name = models.CharField(max_length=150, default='')
   last_name = models.CharField(max_length=100, default='')

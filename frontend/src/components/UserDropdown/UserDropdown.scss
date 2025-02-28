@@ -1,0 +1,49 @@
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+
+  .user-btn {
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    min-width: 150px;
+    height: auto;
+    padding: 10px 0;
+    z-index: 1000;
+
+    .dropdown-item {
+      padding: 10px 15px;
+      color: black;
+      text-decoration: none;
+      font-weight: 400;
+      font-family: "Oswald";
+      letter-spacing: .1cap;
+      text-transform: uppercase;
+      transition: background 0.3s;
+      text-align: left;
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background: #f1f1f1;
+      }
+    }
+
+    .logout-btn {
+      width: 100%;
+      text-align: left;
+    }
+  }
+}

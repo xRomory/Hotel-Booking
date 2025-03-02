@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticated
 from users.permissions import IsAdminOrReadOnly
@@ -12,6 +12,7 @@ from .serializers import RoomBookingSerializer, TransactionSerializer
 # Create your views here.
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def create_transaction(request):
     serializer = TransactionSerializer(data=request.data)
     if serializer.is_valid():
@@ -42,8 +43,9 @@ class RoomBookingListCreateView(generics.ListCreateAPIView):
             raise PermissionDenied("You must be logged in to book a room.")
     
         booking = serializer.save(customer=self.request.user)
-        booking.room.status = "reserved" 
-        booking.room.save()
+        if hasattr(booking, "room") and booking.room:
+            booking.room.status = "reserved"
+            booking.room.save()
 
 #Ables us to Retrieve, update, and delete a specific booking
 class RoomBookingDetailView(generics.RetrieveUpdateDestroyAPIView):

@@ -7,14 +7,14 @@ from .serializers import HotelRoomSerializers
 
 # Create your views here.
 @api_view(['GET'])
-# @permission_classes([AllowAny])
+@permission_classes([AllowAny])
 def get_rooms(request):
   rooms = HotelRoom.objects.all()
   serializer = HotelRoomSerializers(rooms, many=True)
   return Response(serializer.data)
 
 @api_view(['GET'])
-# @permission_classes([AllowAny])
+@permission_classes([AllowAny])
 def get_room(request, id):
   try:
     room = HotelRoom.objects.get(id=id)

@@ -5,7 +5,7 @@ const BookingCard = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const baseURL = "http://127.0.0.1:8000";
+  // const baseURL = "http://127.0.0.1:8000";
 
   useEffect(() => {
     const fetchBookings = async () => {

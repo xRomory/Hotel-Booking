@@ -33,20 +33,35 @@ const BookNowButton = ({ room }) => {
   const handleConfirmBooking = async (e) => {
     e.preventDefault();
 
+    const token = localStorage.getItem("token") || "";
+
+    if (!token.trim()) {
+      alert("You must be logged in to book a room.");
+      return;
+    }
+
     const bookingData = {
       room: room?.id,
       first_name: formData.firstName,
       last_name: formData.lastName,
       email: formData.email,
       contact_number: formData.contact,
+      booking_date: selectedDates[1]
+        ? selectedDates[1].toISOString().split("T")[0]
+        : null,
       check_in: selectedDates[0]
-        ? selectedDates[0].toISOString().split("T")[0]
+        ? selectedDates[0].toISOString().split("T")[0] + "T14:00:00" // Set fixed check-in time
         : null,
       check_out: selectedDates[1]
-        ? selectedDates[1].toISOString().split("T")[0]
+        ? selectedDates[1].toISOString().split("T")[0] + "T12:00:00" // Set fixed check-out time
         : null,
       status: "reserved",
     };
+
+    if (selectedDates[1] <= selectedDates[0]) {
+      alert("Check-out date must be after check-in date.");
+      return;
+    }
 
     if (!room?.id) {
       alert("Invalid room selection.");
@@ -59,19 +74,13 @@ const BookNowButton = ({ room }) => {
     }
 
     try {
-      const token = JSON.parse(localStorage.getItem("token") || '""');
-
-      if (!token) {
-        alert("You must be logged in to book a room.");
-        return;
-      }
-
       const bookingResponse = await fetch(
         "http://127.0.0.1:8000/api/bookings/room-bookings/",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "X-CSRFToken": document.cookie.match(/csrftoken=([^ ;]+)/)?.[1] || "",
             Authorization: `Token ${token}`, // Include the token here
           },
           body: JSON.stringify(bookingData),
@@ -79,7 +88,15 @@ const BookNowButton = ({ room }) => {
       );
       if (!bookingResponse.ok) throw new Error("Booking Failed!");
 
-      const bookingResult = await bookingResponse.json();
+      let bookingResult;
+      try {
+        bookingResult = await bookingResponse.json();
+      } catch (error) {
+        console.error("Error parsing JSON response:", error);
+        alert("Booking request failed. Please try again.");
+        return;
+      }
+
       const bookingId = bookingResult.id;
 
       console.log("Booking successful:", bookingResult);
@@ -93,7 +110,10 @@ const BookNowButton = ({ room }) => {
         card_number: formData.cardNumber,
       };
 
-      console.log("Transaction Payload:", JSON.stringify(transactionData, null, 2));
+      console.log(
+        "Transaction Payload:",
+        JSON.stringify(transactionData, null, 2)
+      );
 
       const transactionResponse = await fetch(
         "http://127.0.0.1:8000/api/bookings/transactions/",
@@ -180,151 +200,148 @@ const BookNowButton = ({ room }) => {
               </div>
             )}
 
-            {step === 2 && (
-              <form className="step-2" onSubmit={handleConfirmBooking}>
-                <h3>Step 2: Your Details</h3>
+            <form className="form-style" onSubmit={handleConfirmBooking}>
+              {step === 2 && (
+                <>
+                  <h3>Step 2: Your Details</h3>
 
-                <label>
-                  First Name:
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
+                  <label>
+                    First Name:
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
 
-                <label>
-                  Last Name:
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
+                  <label>
+                    Last Name:
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
 
-                <label>
-                  Email:
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
+                  <label>
+                    Email:
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
 
-                <label>
-                  Contact Number:
-                  <input
-                    type="text"
-                    name="contact"
-                    value={formData.contact}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
-                <div className="cancellation-policy">
-                  <h4>Cancellation Policy</h4>
-                  <p>
-                    You may cancel up to 24 hours before check-in for a full
-                    refund.
-                  </p>
-                </div>
+                  <label>
+                    Contact Number:
+                    <input
+                      type="text"
+                      name="contact"
+                      value={formData.contact}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
+                  <div className="cancellation-policy">
+                    <h4>Cancellation Policy</h4>
+                    <p>
+                      You may cancel up to 24 hours before check-in for a full
+                      refund.
+                    </p>
+                  </div>
 
-                <button
-                  type="submit"
-                  className="back-button mx-2"
-                  onClick={() => setStep(1)}
-                >
-                  Back
-                </button>
+                  <button
+                    type="submit"
+                    className="back-button mx-2"
+                    onClick={() => setStep(1)}
+                  >
+                    Back
+                  </button>
 
-                <button
-                  type="submit"
-                  className="confirm-button"
-                  onClick={() => setStep(3)}
-                >
-                  Next
-                </button>
-              </form>
-            )}
+                  <button className="confirm-button" onClick={() => setStep(3)}>
+                    Next
+                  </button>
+                </>
+              )}
 
-            {step === 3 && (
-              <form className="step-3" onSubmit={handleConfirmBooking}>
-                {/* Card Payment Section */}
-                <h3>Step 3: Payment Details</h3>
+              {step === 3 && (
+                <>
+                  {/* Card Payment Section */}
+                  <h3>Step 3: Payment Details</h3>
 
-                <label>
-                  Cardholder First Name:
-                  <input
-                    type="text"
-                    name="cardFirstName"
-                    value={formData.cardFirstName}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
+                  <label>
+                    Cardholder First Name:
+                    <input
+                      type="text"
+                      name="cardFirstName"
+                      value={formData.cardFirstName}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
 
-                <label>
-                  Cardholder Last Name:
-                  <input
-                    type="text"
-                    name="cardLastName"
-                    value={formData.cardLastName}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
+                  <label>
+                    Cardholder Last Name:
+                    <input
+                      type="text"
+                      name="cardLastName"
+                      value={formData.cardLastName}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
 
-                <label>
-                  Card Number:
-                  <input
-                    type="text"
-                    name="cardNumber"
-                    value={formData.cardNumber}
-                    onChange={handleChange}
-                    required
-                  />
-                </label>
+                  <label>
+                    Card Number:
+                    <input
+                      type="text"
+                      name="cardNumber"
+                      value={formData.cardNumber}
+                      onChange={handleChange}
+                      required
+                    />
+                  </label>
 
-                <label>
-                  Amount to Pay:
-                  <input
-                    type="number"
-                    name="amountPaid"
-                    value={amountPaid}
-                    onChange={(e) => setAmountPaid(e.target.value)}
-                    min="100"
-                    max={room?.price}
-                    required
-                  />
-                </label>
+                  <label>
+                    Amount to Pay:
+                    <input
+                      type="number"
+                      name="amountPaid"
+                      value={amountPaid}
+                      onChange={(e) => setAmountPaid(e.target.value)}
+                      min="100"
+                      max={room?.price}
+                      required
+                    />
+                  </label>
 
-                <div className="cancellation-policy">
-                  <h4>Cancellation Policy</h4>
-                  <p>
-                    You may cancel up to 24 hours before check-in for a full
-                    refund.
-                  </p>
-                </div>
+                  <div className="cancellation-policy">
+                    <h4>Cancellation Policy</h4>
+                    <p>
+                      You may cancel up to 24 hours before check-in for a full
+                      refund.
+                    </p>
+                  </div>
 
-                <button
-                  type="submit"
-                  className="back-button mx-2"
-                  onClick={() => setStep(2)}
-                >
-                  Back
-                </button>
+                  <button
+                    className="back-button mx-2"
+                    onClick={() => setStep(2)}
+                  >
+                    Back
+                  </button>
 
-                <button type="submit" className="confirm-button">
-                  Confirm
-                </button>
-              </form>
-            )}
+                  <button type="submit" className="confirm-button">
+                    Confirm
+                  </button>
+                </>
+              )}
+            </form>
 
             <button
               className="close-button"

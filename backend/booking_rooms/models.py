@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.core.exceptions import ValidationError
 from hotel_rooms.models import HotelRoom
+from datetime import time, datetime
 # from users.models import CustomUser
 
 # Create your models here.
@@ -22,35 +23,39 @@ class RoomBooking(models.Model):
   last_name = models.CharField(max_length=100, default='')
   email = models.EmailField()
   contact_number = models.CharField(max_length=20, default='')
-  check_in = models.DateField()
-  check_out = models.DateField()
+  booking_date = models.DateField()
+  check_in = models.DateTimeField()
+  check_out = models.DateTimeField()
   status = models.CharField(max_length=20, choices=ROOM_STATUS, default='available')
 
   def __str__(self):
     return f"Booking for {self.first_name} {self.last_name} - {self.status}"
-  
-  def clean(self):
-    if self.check_out <= self.check_in:
-      raise ValidationError("Check-out must be after check-in date.")
 
-  def save(self, *args, **kwargs):
-    self.full_clean()  # Validate before saving
+  def clean(self):
+    super().clean()
+
+    if self.check_in and self.check_out:
+      if self.check_out <= self.check_in:
+        raise ValidationError("Check-out must be after check-in date.")
 
     # Check for overlapping bookings
     overlapping_bookings = RoomBooking.objects.filter(
-        room=self.room,
-        status__in=['reserved', 'occupied'],
-        check_in__lt=self.check_out,  # check-in before current check-out
-        check_out__gt=self.check_in  # check-out after current check-in
+      room=self.room,
+      status__in=['reserved', 'occupied'],
+      check_in__lt=self.check_out,  # check-in before current check-out
+      check_out__gt=self.check_in  # check-out after current check-in
     ).exclude(pk=self.pk)  # Exclude the current instance in case of updates
 
     if overlapping_bookings.exists():
-        raise ValidationError("This room is already booked for the selected dates.")
+      raise ValidationError("This room is already booked for the selected dates.")
+    
+  def save(self, *args, **kwargs):
+    self.full_clean()  # Validate before saving
 
     if self.status in ['reserved', 'occupied']:
-        self.room.status = self.status
+      self.room.status = self.status
     elif self.status == 'cancelled':
-        self.room.status = 'available'
+      self.room.status = 'available'
 
     self.room.save()
     super().save(*args, **kwargs)

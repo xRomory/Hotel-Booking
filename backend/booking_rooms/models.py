@@ -1,7 +1,8 @@
+from django.conf import settings
 from django.db import models
 from django.core.exceptions import ValidationError
 from hotel_rooms.models import HotelRoom
-from users.models import CustomUser
+# from users.models import CustomUser
 
 # Create your models here.
 
@@ -15,7 +16,7 @@ class RoomBooking(models.Model):
     ('reserved', 'Reserved')
   ]
 
-  customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+  customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
   room = models.ForeignKey(HotelRoom, on_delete=models.CASCADE)
   first_name = models.CharField(max_length=150, default='')
   last_name = models.CharField(max_length=100, default='')
@@ -33,10 +34,24 @@ class RoomBooking(models.Model):
       raise ValidationError("Check-out must be after check-in date.")
 
   def save(self, *args, **kwargs):
-    if self.status == 'reserved' or self.status == 'occupied':
+    self.full_clean()  # Validate before saving
+
+    # Check for overlapping bookings
+    overlapping_bookings = RoomBooking.objects.filter(
+        room=self.room,
+        status__in=['reserved', 'occupied'],
+        check_in__lt=self.check_out,  # check-in before current check-out
+        check_out__gt=self.check_in  # check-out after current check-in
+    ).exclude(pk=self.pk)  # Exclude the current instance in case of updates
+
+    if overlapping_bookings.exists():
+        raise ValidationError("This room is already booked for the selected dates.")
+
+    if self.status in ['reserved', 'occupied']:
         self.room.status = self.status
     elif self.status == 'cancelled':
-        self.room.status = 'available'  # Make the room available again
+        self.room.status = 'available'
+
     self.room.save()
     super().save(*args, **kwargs)
 
@@ -56,7 +71,12 @@ class Transaction(models.Model):
   def is_fully_paid(self):
     return self.amount_paid >= self.total_payment
   
+  def clean(self):
+    if self.booking.status == 'cancelled':
+        raise ValidationError("Cannot process a transaction for a canceled booking.")
+    if self.amount_paid > self.total_payment:
+        raise ValidationError("Amount paid cannot exceed the total payment.")
+  
   def save(self, *args, **kwargs):
-    if self.amount_paid is None:
-      self.amount_paid = self.total_payment  # Default to full payment
+    self.full_clean()  # Ensures validation before saving
     super().save(*args, **kwargs)

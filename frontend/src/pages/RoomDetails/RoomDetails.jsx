@@ -28,13 +28,28 @@ const RoomDetails = () => {
 
     const fetchRoomDetails = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/rooms/room-details/${id}/`);
+        const token = localStorage.getItem("token");
+
+        const headers = {
+          "Content-Type": "application/json",
+        };
+
+        // Only add Authorization if the user is logged in
+        if (token) {
+          headers["Authorization"] = `Token ${token}`;
+        }
+
+        const response = await fetch(
+          `http://127.0.0.1:8000/api/rooms/room-details/${id}/`,
+          { headers }
+        );
+
         if (!response.ok) {
           throw new Error("Room not found");
         }
+
         const data = await response.json();
         setRoom(data);
-
       } catch (err) {
         setError(err.message);
       } finally {
@@ -45,7 +60,7 @@ const RoomDetails = () => {
     fetchRoomDetails();
   }, [id]);
 
-  if (loading) return <h2>Loading...</h2>
+  if (loading) return <h2>Loading...</h2>;
   if (error) return <h2>{error}</h2>;
   if (!room) return <h2>Room not found</h2>;
 
@@ -77,15 +92,33 @@ const RoomDetails = () => {
 
         <div className="room-details">
           <h2>Price</h2>
-          <p>Price starts at <strong>{room.price}</strong></p>
+          <p>
+            Price starts at <strong>{room.price}</strong>
+          </p>
           <h2>Check-in</h2>
-          <p>Check-in from <strong>{room.checkIn}</strong> – anytime</p>
+          <p>
+            Check-in from <strong>{room.checkIn}</strong> – anytime
+          </p>
           <h2>Check-out</h2>
-          <p>Check-out before <strong>{room.checkOut}</strong></p>
+          <p>
+            Check-out before <strong>{room.checkOut}</strong>
+          </p>
           <h2>Special Check-in Instructions</h2>
-          <p>Guests will receive an email with check-in instructions on the day their booking is confirmed. Front desk staff will greet guests upon arrival.</p>
+          <p>
+            Guests will receive an email with check-in instructions on the day
+            their booking is confirmed. Front desk staff will greet guests upon
+            arrival.
+          </p>
           <h2>Pets</h2>
-          <p>{room.petsAllowed ? <><MdOutlinePets /> Pets are allowed.</> : "Pets are not allowed."}</p>
+          <p>
+            {room.petsAllowed ? (
+              <>
+                <MdOutlinePets /> Pets are allowed.
+              </>
+            ) : (
+              "Pets are not allowed."
+            )}
+          </p>
         </div>
 
         <div className="amenities-container" data-aos="fade-up">

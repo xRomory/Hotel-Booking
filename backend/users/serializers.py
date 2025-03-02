@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.contrib.auth.hashers import make_password
 from .models import CustomUser
 
 class UserSerializer(serializers.ModelSerializer):
@@ -20,3 +21,4 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
       user = CustomUser.objects.create_user(**validated_data)
       return user
+    

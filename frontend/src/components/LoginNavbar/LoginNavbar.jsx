@@ -6,7 +6,6 @@ import { FaHotel } from "react-icons/fa6";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { IoIosMenu } from "react-icons/io";
 
-
 function LoginNavbar() {
   const [active, setActive] = useState("navbar");
   const showNav = () => {

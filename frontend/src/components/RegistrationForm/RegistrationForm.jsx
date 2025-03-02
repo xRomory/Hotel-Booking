@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import './RegistrationForm.scss'
-import { assets } from '../../assets/assets';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import "./RegistrationForm.scss";
+import { assets } from "../../assets/assets";
+import { Link } from "react-router-dom";
 import { FaHotel } from "react-icons/fa6";
 
 const bgImages = [
@@ -9,9 +9,8 @@ const bgImages = [
   assets.hotelBg1,
   assets.hotelBg,
   assets.beachTopView,
-  assets.hallway
+  assets.hallway,
 ];
-
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +21,7 @@ const RegistrationForm = () => {
     password: "",
   });
 
-  const [message, setMessage] = useState(""); 
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,25 +38,42 @@ const RegistrationForm = () => {
       password: formData.password,
     };
 
+    const csrfResponse = await fetch("http://127.0.0.1:8000/api/users/csrf/", {
+      credentials: "include",
+    });
+    const csrfData = await csrfResponse.json();
+    const csrftoken = csrfData.csrfToken;
+
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/users/register/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-  
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/users/register/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken,
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
       const data = await response.json();
       if (response.status === 201) {
         setMessage("Registration Successful!");
-        setFormData({  first_name: "", last_name: "", username: "", email: "", password: ""  })
+        localStorage.setItem("token", data.token);
+        setFormData({
+          first_name: "",
+          last_name: "",
+          username: "",
+          email: "",
+          password: "",
+        });
       } else {
         setMessage(data.detail || "Registration Failed");
         console.error("Error:", data);
       }
     } catch (error) {
-      console.error("Error:", error);
+      // console.error("Error:", error);
       setMessage("An error occurred. Please try again.");
     }
   };
@@ -73,19 +89,19 @@ const RegistrationForm = () => {
   }, []);
 
   return (
-    <div 
+    <div
       className="registration-container"
       style={{
-        background: `linear-gradient(rgba(33, 33, 33, 0.522), rgba(33, 33, 33, 0.522)), url(${bgImages[currentBg]}) no-repeat center`,
+        background: `linear-gradient(rgba(33, 33, 33, 0.522), rgba(33, 33, 33, 0.522)), url(${assets.food}) no-repeat center`,
         backgroundSize: "cover",
-        transition: "background-image 1s ease-in-out"
+        transition: "background-image 1s ease-in-out",
       }}
     >
       <div className="logo-div">
         <Link to="/" className="logo">
-          <h1 className='flex'>
-            <FaHotel className='icon' />
-            <span className='brand-name'>Pseubomotel</span>
+          <h1 className="flex">
+            <FaHotel className="icon" />
+            <span className="brand-name">Pseubomotel</span>
           </h1>
         </Link>
       </div>
@@ -96,38 +112,70 @@ const RegistrationForm = () => {
           {message && <p>{message}</p>}
 
           <div className="input-box">
-            <input type="text" name='first_name' placeholder='First Name' required value={formData.first_name} onChange={handleChange}/>
+            <input
+              type="text"
+              name="first_name"
+              placeholder="First Name"
+              required
+              value={formData.first_name}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="input-box">
-            <input type="text" name='last_name' placeholder='Last Name' required value={formData.last_name} onChange={handleChange}/>
+            <input
+              type="text"
+              name="last_name"
+              placeholder="Last Name"
+              required
+              value={formData.last_name}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="input-box">
-            <input type="text" name='username' placeholder='Username' required value={formData.username} onChange={handleChange}/>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              required
+              value={formData.username}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="input-box">
-            <input type="text" name='email' placeholder='Email' required value={formData.email} onChange={handleChange}/>
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="input-box">
-            <input type="password" name='password' placeholder='Password' required value={formData.password} onChange={handleChange}/>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+              value={formData.password}
+              onChange={handleChange}
+            />
           </div>
 
-          <button type='submit'>Register</button>
+          <button type="submit">Register</button>
 
           <div className="login-link">
             <p>Have an account? </p>
-            <Link to='/Login'>
-              Login
-            </Link>
+            <Link to="/Login">Login</Link>
           </div>
-
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RegistrationForm
+export default RegistrationForm;

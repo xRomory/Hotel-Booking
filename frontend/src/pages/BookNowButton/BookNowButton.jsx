@@ -59,15 +59,24 @@ const BookNowButton = ({ room }) => {
     }
 
     try {
+      const token = JSON.parse(localStorage.getItem("token") || '""');
+
+      if (!token) {
+        alert("You must be logged in to book a room.");
+        return;
+      }
+
       const bookingResponse = await fetch(
         "http://127.0.0.1:8000/api/bookings/room-bookings/",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`, // Include the token here
+          },
           body: JSON.stringify(bookingData),
         }
       );
-
       if (!bookingResponse.ok) throw new Error("Booking Failed!");
 
       const bookingResult = await bookingResponse.json();
@@ -79,19 +88,21 @@ const BookNowButton = ({ room }) => {
         booking: bookingId,
         cardholder_first_name: formData.cardFirstName,
         cardholder_last_name: formData.cardLastName,
-        amount_paid: parseFloat(amountPaid).toFixed(2),
-        total_payment: parseFloat(room?.price).toFixed(2),
+        amount_paid: parseFloat(amountPaid),
+        total_payment: parseFloat(room?.price),
         card_number: formData.cardNumber,
-        
       };
 
-      console.log("Transaction Payload:", transactionData); // Debugging log
+      console.log("Transaction Payload:", JSON.stringify(transactionData, null, 2));
 
       const transactionResponse = await fetch(
         "http://127.0.0.1:8000/api/bookings/transactions/",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
           body: JSON.stringify(transactionData),
         }
       );
@@ -116,6 +127,8 @@ const BookNowButton = ({ room }) => {
       console.error("Error:", error);
       alert("Booking Failed! Please try again.");
     }
+
+    console.log("Token:", token);
 
     // // Save booking details
     // setBookingDetails({

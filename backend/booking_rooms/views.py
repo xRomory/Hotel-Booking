@@ -2,6 +2,10 @@ from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework import permissions
+from rest_framework.permissions import IsAuthenticated
+from users.permissions import IsAdminOrReadOnly
+from rest_framework.exceptions import PermissionDenied
 from .models import RoomBooking, Transaction
 from .serializers import RoomBookingSerializer, TransactionSerializer
 
@@ -21,9 +25,23 @@ def create_transaction(request):
 class RoomBookingListCreateView(generics.ListCreateAPIView):
     queryset = RoomBooking.objects.all()
     serializer_class = RoomBookingSerializer
+    permission_classes = [IsAuthenticated]
 
-    def create_perform(self, serializer):
-        booking = serializer.save()
+    def get_queryset(self):
+        customer = self.request.user
+        if not customer.is_authenticated:  # Check if the user is logged in
+            return RoomBooking.objects.none()  # Return empty queryset for anonymous users
+
+        if not customer.is_superuser and not customer.is_staff:
+            return RoomBooking.objects.filter(customer=customer) or RoomBooking.objects.none()
+
+        return super().get_queryset()
+
+    def perform_create(self, serializer):
+        if not self.request.user.is_authenticated:
+            raise PermissionDenied("You must be logged in to book a room.")
+    
+        booking = serializer.save(customer=self.request.user)
         booking.room.status = "reserved" 
         booking.room.save()
 
@@ -31,6 +49,12 @@ class RoomBookingListCreateView(generics.ListCreateAPIView):
 class RoomBookingDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = RoomBooking.objects.all()
     serializer_class = RoomBookingSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        if not self.request.user.is_authenticated:
+            return RoomBooking.objects.none()
+        return RoomBooking.objects.filter(customer=self.request.user)   
 
     def perform_update(self, serializer):
         booking = serializer.save()
@@ -51,13 +75,23 @@ class RoomBookingDetailView(generics.RetrieveUpdateDestroyAPIView):
 class TransactionListCreateView(generics.ListCreateAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):
+        if not self.request.user.is_authenticated:
+            return Transaction.objects.none()
+        return Transaction.objects.filter(booking__customer=self.request.user)
+    
     def create(self, request, *args, **kwargs):
         data = request.data.copy()
 
         # Ensure 'amount_paid' is set
         if 'amount_paid' not in data or data['amount_paid'] in [None, '']:
-            data['amount_paid'] = data.get('total_payment', 0)  # Default to full payment
+            data['amount_paid'] = data.get('total_payment', 0)
+
+        # Ensure amount_paid does not exceed total_payment
+        if float(data['amount_paid']) > float(data['total_payment']):
+            return Response({"error": "Amount paid cannot exceed total payment."}, status=status.HTTP_400_BAD_REQUEST)
 
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
@@ -66,6 +100,10 @@ class TransactionListCreateView(generics.ListCreateAPIView):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
+
 class TransactionDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
+
+    def get_queryset(self):
+        return Transaction.objects.filter(booking__customer=self.request.user)

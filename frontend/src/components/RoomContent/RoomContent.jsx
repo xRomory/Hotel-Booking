@@ -7,20 +7,28 @@ import { Link, useNavigate } from 'react-router-dom';
 // import { RoomData } from '../../assets/assets';
 
 const RoomContent = () => {
-  const navigate = useNavigate()
-  // const handleViewDetails = (id) => {
-  //   navigate(`/rooms/${id}`);
-  // }
 
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/rooms/room-details').then(response => {
-      setRooms(response.data);
-    }).catch(error => {
-      console.error("Error fetching data:", error);
-    })
-  }, []);
+    const fetchRooms = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Get token if available
+    
+        const headers = token
+          ? { "Authorization": `Token ${token}` }
+          : {}; // Only add Authorization header if token exists
+    
+        const response = await axios.get('http://127.0.0.1:8000/api/rooms/room-details/', { headers });
+    
+        setRooms(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error.response?.data || error.message);
+      }
+    };
+  
+    fetchRooms();
+  }, []);  
 
   return (
     <section className="rooms section container">

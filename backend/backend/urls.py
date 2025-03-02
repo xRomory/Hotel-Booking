@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('api/users/', include('users.urls')),
+    path('api/users/', include('users.urls')),
     path('api/rooms/', include('hotel_rooms.urls')),
     path('api/bookings/', include('booking_rooms.urls')),
 ]
@@ -31,5 +31,5 @@ if settings.DEBUG:
   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [
-  path('api_auth', include('rest_framework.urls'))
+  path('api-auth/', include('rest_framework.urls'))
 ]

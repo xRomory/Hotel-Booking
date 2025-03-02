@@ -1,7 +1,11 @@
 from rest_framework import serializers
 from .models import RoomBooking, Transaction
+# from users.models import CustomUser
+# from users.serializers import UserSerializer
 
 class RoomBookingSerializer(serializers.ModelSerializer):
+  customer = serializers.ReadOnlyField(source='customer.username')
+
   class Meta:
     model = RoomBooking
     fields = '__all__'
@@ -13,6 +17,7 @@ class RoomBookingSerializer(serializers.ModelSerializer):
   
 class TransactionSerializer(serializers.ModelSerializer):
   booking_details = RoomBookingSerializer(source='booking', read_only=True)
+  customer = serializers.ReadOnlyField(source='booking.customer.username')
 
   class Meta:
     model = Transaction

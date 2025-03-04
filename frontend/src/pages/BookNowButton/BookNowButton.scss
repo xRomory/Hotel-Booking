@@ -1,14 +1,19 @@
-// .book-now-button {
-//   background: #007bff;
-//   color: white;
-//   border: none;
-//   padding: 12px 24px;
-//   font-size: 18px;
-//   border-radius: 6px;
-//   cursor: pointer;
-//   transition: 0.3s;
-//   &:hover { background: #0056b3; }
-// }
+// Color Theme
+:root {
+  --PrimaryColor: hsl(50, 100%, 91%);
+  --HoverColor: hsl(50, 100%, 81%);
+  --whiteColor: hsl(0, 0, 100%);
+  --blackColor: hsl(0, 0%, 18%);
+  --LightDarkHover: hsla(0, 0%, 15%, 0.9);
+  --blackHover: hsla(0, 0%, 11%, 0.9);
+  --textColor: hsl(240, 1%, 48%);
+  --grayBG: hsl(240, 1%, 66%);
+  --grayText: rgb(190, 190, 190);
+  --whiteColorDeam: hsl(0, 0%, 93%);
+  --inputColor: hsl(330, 12%, 97%);
+  --darkBrown: #4f3e2e;
+  --lightBrown: #9c7b5a;
+}
 
 .modal-container {
   position: fixed; /* Keeps it centered on screen */
@@ -32,13 +37,15 @@
     transform: scale(0.9);
     animation: fadeInScale 0.3s ease-in-out forwards;
 
-    .form-style, .step-1 {
+    .form-style,
+    .step-1 {
       label {
         display: block;
         margin: 10px 0;
         font-weight: bold;
 
-        input, select {
+        input,
+        select {
           width: 100%;
           padding: 10px;
           margin-top: 5px;
@@ -51,7 +58,8 @@
         font-size: 1rem !important;
       }
 
-      .next-button, .confirm-button {
+      .next-button,
+      .confirm-button {
         background: #28a745;
         margin: auto;
         color: white;
@@ -64,7 +72,7 @@
         margin-top: 15px;
         transition: 0.3s;
         font-family: Oswald;
-        letter-spacing: .1cap;
+        letter-spacing: 0.1cap;
         text-transform: uppercase;
         font-weight: 500;
 
@@ -89,7 +97,7 @@
       font-family: Oswald;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: .1cap;
+      letter-spacing: 0.1cap;
 
       &:hover {
         background: #e6c62a;
@@ -111,7 +119,7 @@
       font-family: Oswald;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: .1cap;
+      letter-spacing: 0.1cap;
 
       &:hover {
         background: #c82333;
@@ -120,8 +128,64 @@
     }
   }
 }
-  
+
+.confirmation-popup {
+  padding: 1rem;
+  width: 35vw;
+  height: 55vh;
+  background: #f3ebc8;
+  margin: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+
+  .confirmation-content {
+    h2 {
+      font-family: "Oswald";
+      font-size: 3rem;
+      margin: 10px;
+      padding: 7px;
+      text-align: center;
+    }
+
+    p {
+      color: #333;
+      padding: 3px 8px;
+      font-size: 1.1rem;
+    }
+
+    .close-confirmation {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30%;
+      max-width: 280px;
+      padding: 15px;
+      background-color: #8d7a69;
+      color: #fff5ec;
+      font-size: 1.2rem;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      margin: 30px auto;
+      cursor: pointer;
+      font-weight: 700; 
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+      &:hover {
+        background-color: var(--lightBrown);
+        transform: scale(1.02);
+      }
+    }
+  }
+}
+
 @keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

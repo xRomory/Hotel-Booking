@@ -73,6 +73,12 @@ const BookNowButton = ({ room }) => {
       return;
     }
 
+    // Verify booking details before sending the request
+    if (!room?.id || !selectedDates[0] || !selectedDates[1]) {
+      alert("Please ensure all booking details are filled.");
+      return;
+    }
+
     try {
       const bookingResponse = await fetch(
         "http://127.0.0.1:8000/api/bookings/room-bookings/",
@@ -80,7 +86,8 @@ const BookNowButton = ({ room }) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "X-CSRFToken": document.cookie.match(/csrftoken=([^ ;]+)/)?.[1] || "",
+            "X-CSRFToken":
+              document.cookie.match(/csrftoken=([^ ;]+)/)?.[1] || "",
             Authorization: `Token ${token}`, // Include the token here
           },
           body: JSON.stringify(bookingData),
@@ -149,18 +156,12 @@ const BookNowButton = ({ room }) => {
     }
 
     console.log("Token:", token);
+  };
 
-    // // Save booking details
-    // setBookingDetails({
-    //   roomName: room?.roomsTitle,
-    //   checkIn: selectedDates[0]?.toDateString() || "Not selected",
-    //   checkOut: selectedDates[1]?.toDateString() || "Not selected",
-    //   totalPayment: room?.price || "N/A",
-    //   customerName: `${formData.firstName} ${formData.lastName}`,
-    // });
-
-    // setShowModal(false);
-    // setShowConfirmation(true); // Show confirmation popup
+  const formatDate = (dateString) => {
+    if (!dateString) return "Not selected";
+    const date = new Date(dateString);
+    return date.toLocaleString(); // Format to locale date and time string
   };
 
   return (
@@ -355,17 +356,17 @@ const BookNowButton = ({ room }) => {
 
       {/* Confirmation Popup */}
       {showConfirmation && (
-        <div className="confirmation-popup" data-aos="zoom-in">
+        <div className="confirmation-popup my-5" data-aos="zoom-in">
           <div className="confirmation-content">
             <h2>Booking Confirmed! 🎉</h2>
             <p>
               <strong>Room:</strong> {bookingDetails.roomName}
             </p>
             <p>
-              <strong>Check-in:</strong> {bookingDetails.checkIn}
+              <strong>Check-in:</strong> {formatDate(bookingDetails.check_in)}
             </p>
             <p>
-              <strong>Check-out:</strong> {bookingDetails.checkOut}
+              <strong>Check-out:</strong> {formatDate(bookingDetails.check_out)}
             </p>
             <p>
               <strong>Total Payment:</strong> {bookingDetails.totalPayment}

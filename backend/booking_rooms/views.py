@@ -32,10 +32,8 @@ class RoomBookingListCreateView(generics.ListCreateAPIView):
         customer = self.request.user
         if not customer.is_authenticated:  # Check if the user is logged in
             return RoomBooking.objects.none()  # Return empty queryset for anonymous users
-
         if not customer.is_superuser and not customer.is_staff:
             return RoomBooking.objects.filter(customer=customer) or RoomBooking.objects.none()
-
         return super().get_queryset()
 
     def perform_create(self, serializer):
@@ -51,12 +49,13 @@ class RoomBookingListCreateView(generics.ListCreateAPIView):
 class RoomBookingDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = RoomBooking.objects.all()
     serializer_class = RoomBookingSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        if not self.request.user.is_authenticated:
+        customer = self.request.user
+        if not customer.is_authenticated:
             return RoomBooking.objects.none()
-        return RoomBooking.objects.filter(customer=self.request.user)   
+        return RoomBooking.objects.filter(customer=customer)   
 
     def perform_update(self, serializer):
         booking = serializer.save()
@@ -72,15 +71,18 @@ class RoomBookingDetailView(generics.RetrieveUpdateDestroyAPIView):
         booking = self.get_object()
         if Transaction.objects.filter(booking=booking).exists():
             return Response({"error": "Cannot cancel a booking that has a transaction."}, status=status.HTTP_400_BAD_REQUEST)
+            print(f"Transactions linked to booking {booking.id}: {transactions}")
+
         return super().delete(request, *args, **kwargs)
     
 class TransactionListCreateView(generics.ListCreateAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        if not self.request.user.is_authenticated:
+        customer = self.request.user
+        if not customer.is_authenticated:
             return Transaction.objects.none()
         return Transaction.objects.filter(booking__customer=self.request.user)
     
@@ -102,10 +104,10 @@ class TransactionListCreateView(generics.ListCreateAPIView):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-
 class TransactionDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Transaction.objects.filter(booking__customer=self.request.user)

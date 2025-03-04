@@ -46,6 +46,12 @@ const LoginForm = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token") || "";
+
+    if (!token.trim()) {
+      alert("Not a valid user.");
+      return;
+    }
 
     setTimeout(() => {
       console.log("Final credentials before sending:", credentials);
@@ -64,16 +70,17 @@ const LoginForm = () => {
           credentials: "include",
         }
       );
+      
       const csrfData = await csrfResponse.json();
       const csrftoken = csrfData.csrfToken;
-      const authToken = localStorage.getItem("authToken");
+      // const authToken = localStorage.getItem("authToken");
 
       const response = await fetch("http://127.0.0.1:8000/api/users/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "X-CSRFToken": csrftoken,
-          // Authorization: `Token ${authToken || ""}`,
+          // Authorization: `Token ${token || ""}`,
         },
         credentials: "include",
         body: JSON.stringify(payload),
@@ -81,7 +88,7 @@ const LoginForm = () => {
 
       console.log("CSRF Token:", csrfData);
       console.log("Sending credentials:", credentials);
-      console.log("Token:", authToken);
+      console.log("Token:", token);
 
       if (!response.ok) {
         alert("Invalid Credentials");
@@ -92,8 +99,8 @@ const LoginForm = () => {
 
       // **Ensure token is stored in localStorage**
       if (data.token) {
-        localStorage.setItem("authToken", data.token);
-        console.log("Token stored:", localStorage.getItem("authToken")); // Debugging
+        localStorage.setItem("token", data.token);
+        console.log("Token stored:", localStorage.getItem("token")); // Debugging
       } else {
         console.error("No token received from backend");
       }

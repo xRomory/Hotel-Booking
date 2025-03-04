@@ -62,7 +62,7 @@ class RoomBooking(models.Model):
 
 #Data of Transaction when a user books for room
 class Transaction(models.Model):
-  booking = models.ForeignKey(RoomBooking, on_delete=models.CASCADE)
+  booking = models.ForeignKey(RoomBooking, on_delete=models.CASCADE, related_name='transactions')
   cardholder_first_name = models.CharField(max_length=150, default='')
   cardholder_last_name = models.CharField(max_length=150, default='')
   amount_paid = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)

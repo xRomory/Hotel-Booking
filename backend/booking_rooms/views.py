@@ -30,8 +30,8 @@ class RoomBookingListCreateView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         customer = self.request.user
-        if not customer.is_authenticated:  # Check if the user is logged in
-            return RoomBooking.objects.none()  # Return empty queryset for anonymous users
+        # if not customer.is_authenticated:  # Check if the user is logged in
+        #     return RoomBooking.objects.none()  # Return empty queryset for anonymous users
         if not customer.is_superuser and not customer.is_staff:
             return RoomBooking.objects.filter(customer=customer) or RoomBooking.objects.none()
         return super().get_queryset()
@@ -53,37 +53,80 @@ class RoomBookingDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         customer = self.request.user
-        if not customer.is_authenticated:
-            return RoomBooking.objects.none()
-        return RoomBooking.objects.filter(customer=customer)   
+        if customer.is_superuser or customer.is_staff:
+            return RoomBooking.objects.all()
+        return RoomBooking.objects.filter(customer=customer)
 
     def perform_update(self, serializer):
         booking = serializer.save()
-        booking.room.status = booking.status
-        booking.room.save()
+        if booking.room:
+            booking.room.status = booking.status
+            booking.room.save()
+
+    # def perform_destroy(self, instance):
+    #     # Check if the booking has an associated transaction
+    #     if Transaction.objects.filter(booking=instance).exists():
+    #         # Instead of deleting, mark the booking as "cancelled"
+    #         instance.status = "cancelled"
+    #         instance.save()
+    #         return Response({"message": "Booking cancelled successfully."}, status=status.HTTP_200_OK)
+    
+    #     # If no transaction, proceed with deletion
+    #     if instance.room:
+    #         instance.room.status = "available"
+    #         instance.room.save()
+    #     instance.delete()
 
     def perform_destroy(self, instance):
-        instance.room.status = "available"  # Reset room status when canceled
-        instance.room.save()
+        customer = self.request.user
+
+        # Only allow admins to delete
+        if not customer.is_superuser and not customer.is_staff:
+            raise PermissionDenied("Only admins can delete bookings.")
+
+        # Booking must be cancelled before deletion
+        if instance.status != "cancelled":
+            return Response({"error": "Booking must be cancelled before deletion."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Proceed with deletion
+        if instance.room:
+            instance.room.status = "available"
+            instance.room.save()
         instance.delete()
+        return Response({"message": "Booking deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
 
     def delete(self, request, *args, **kwargs):
         booking = self.get_object()
-        if Transaction.objects.filter(booking=booking).exists():
-            return Response({"error": "Cannot cancel a booking that has a transaction."}, status=status.HTTP_400_BAD_REQUEST)
-            print(f"Transactions linked to booking {booking.id}: {transactions}")
-
+    
+        # Only allow admins to delete bookings
+        if not request.user.is_superuser and not request.user.is_staff:
+            raise PermissionDenied("Only admins can delete bookings.")
+    
+        # Allow deletion only if the booking is cancelled
+        if booking.status != "cancelled":
+            return Response({"error": "Booking must be cancelled before deletion."}, status=status.HTTP_400_BAD_REQUEST)
+    
+        # If the booking has a transaction, optionally delete the transaction or raise a warning
+        transactions = Transaction.objects.filter(booking=booking)
+        if transactions.exists():
+            # Optional: Delete transactions related to this booking
+            transactions.delete()
+    
         return super().delete(request, *args, **kwargs)
+
+    # def delete(self, request, *args, **kwargs):
+    #     booking = self.get_object()
+    #     if Transaction.objects.filter(booking=booking).exists():
+    #         return Response({"error": "Cannot cancel a booking that has a transaction."}, status=status.HTTP_400_BAD_REQUEST)
+
+    #     return super().delete(request, *args, **kwargs)
     
 class TransactionListCreateView(generics.ListCreateAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminOrReadOnly]
 
     def get_queryset(self):
-        customer = self.request.user
-        if not customer.is_authenticated:
-            return Transaction.objects.none()
         return Transaction.objects.filter(booking__customer=self.request.user)
     
     def create(self, request, *args, **kwargs):
@@ -93,6 +136,9 @@ class TransactionListCreateView(generics.ListCreateAPIView):
         if 'amount_paid' not in data or data['amount_paid'] in [None, '']:
             data['amount_paid'] = data.get('total_payment', 0)
 
+        # Ensure 'amount_paid' is set
+        data['amount_paid'] = data.get('amount_paid', data.get('total_payment', 0))
+
         # Ensure amount_paid does not exceed total_payment
         if float(data['amount_paid']) > float(data['total_payment']):
             return Response({"error": "Amount paid cannot exceed total payment."}, status=status.HTTP_400_BAD_REQUEST)
@@ -101,8 +147,7 @@ class TransactionListCreateView(generics.ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
 
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=self.get_success_headers(serializer.data))
 
 class TransactionDetailsView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Transaction.objects.all()

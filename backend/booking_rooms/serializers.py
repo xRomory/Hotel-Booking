@@ -17,7 +17,7 @@ class RoomBookingSerializer(serializers.ModelSerializer):
   
 class TransactionSerializer(serializers.ModelSerializer):
   booking_details = RoomBookingSerializer(source='booking', read_only=True)
-  customer = serializers.ReadOnlyField(source='booking.customer.username')
+  customer = serializers.ReadOnlyField(source='booking.id')
 
   class Meta:
     model = Transaction
@@ -29,11 +29,11 @@ class TransactionSerializer(serializers.ModelSerializer):
     return value
   
   def validate(self, attrs):
-        total_payment = attrs.get("total_payment", 0)
-        amount_paid = attrs.get("amount_paid", total_payment)  # Default to total_payment if not provided
-        attrs["amount_paid"] = amount_paid  # Ensure it's set in attrs
+    total_payment = attrs.get("total_payment", 0)
+    amount_paid = attrs.get("amount_paid", total_payment)  # Default to total_payment if not provided
+    attrs["amount_paid"] = amount_paid  # Ensure it's set in attrs
 
-        if amount_paid > total_payment:
-            raise serializers.ValidationError("Amount paid cannot exceed total payment.")
+    if amount_paid > total_payment:
+      raise serializers.ValidationError("Amount paid cannot exceed total payment.")
 
-        return attrs
+    return attrs

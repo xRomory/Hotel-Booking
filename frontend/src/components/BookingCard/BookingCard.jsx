@@ -9,6 +9,14 @@ const BookingCard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedBookingId, setSelectedBookingId] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser)); // Parse user data
+    }
+  }, []);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -32,7 +40,7 @@ const BookingCard = () => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              //   "X-CSRFToken": csrfToken,
+              // "X-CSRFToken": csrfToken,
               Authorization: `Token ${token}`,
             },
           }
@@ -48,7 +56,7 @@ const BookingCard = () => {
           }
         } else {
           const data = await response.json();
-          setBookings(data);
+          setBookings(Array.isArray(data) ? data : data.results || []);
         }
       } catch (err) {
         console.error("Fetching error:", err);
@@ -66,14 +74,16 @@ const BookingCard = () => {
     setShowModal(true);
   };
 
-  const handleConfirmCancellation = async () => {
-    if (!selectedBookingId) return;
-
+  const handleDeleteBooking = async (bookingId) => {
     const token = localStorage.getItem("authToken");
+
+    if (!window.confirm("Are you sure you want to delete this booking?")) {
+      return;
+    }
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/bookings/room-bookings/${selectedBookingId}/`,
+        `http://127.0.0.1:8000/api/bookings/room-bookings/${bookingId}/`,
         {
           method: "DELETE",
           headers: {
@@ -83,19 +93,52 @@ const BookingCard = () => {
         }
       );
 
+      if (response.ok) {
+        setBookings(bookings.filter((booking) => booking.id !== bookingId));
+        alert("Booking deleted successfully.");
+      } else {
+        const errorData = await response.json();
+        alert(errorData.error || "Failed to delete booking.");
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
+      alert("Failed to delete booking. Please try again.");
+    }
+  };
+
+  const handleConfirmCancellation = async () => {
+    if (!selectedBookingId) return;
+
+    const token = localStorage.getItem("authToken");
+
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/bookings/room-bookings/${selectedBookingId}/`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Token ${token}`,
+          },
+          body: JSON.stringify({ status: "cancelled" }),
+        }
+      );
+
       console.log("Deleting booking with ID:", selectedBookingId);
 
       if (response.ok) {
         setBookings(
-          bookings.filter((booking) => booking.id !== selectedBookingId)
+          bookings.map((booking) =>
+            booking.id === selectedBookingId
+              ? { ...booking, status: "cancelled" }
+              : booking
+          )
         );
         setShowModal(false);
         setSelectedBookingId(null);
       } else {
         throw new Error("Failed to cancel booking.");
       }
-
-      console.log("Deleting booking with ID:", selectedBookingId);
     } catch (error) {
       console.error("Cancellation error:", error);
       alert("Failed to cancel booking. Please try again.");
@@ -144,7 +187,14 @@ const BookingCard = () => {
               >
                 Cancel Booking
               </button>
-              <button className="btn">View Details</button>
+              {booking.status === "cancelled" && (
+                <button
+                  className="btn "
+                  onClick={() => handleDeleteBooking(booking.id)}
+                >
+                  Delete Booking
+                </button>
+              )}
             </div>
           ))}
         </div>

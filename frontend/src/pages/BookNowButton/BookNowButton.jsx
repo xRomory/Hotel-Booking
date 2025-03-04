@@ -106,6 +106,7 @@ const BookNowButton = ({ room }) => {
 
       const bookingId = bookingResult.id;
 
+      console.log("Booking ID:", bookingId);
       console.log("Booking successful:", bookingResult);
 
       const transactionData = {
@@ -115,6 +116,7 @@ const BookNowButton = ({ room }) => {
         amount_paid: parseFloat(amountPaid),
         total_payment: parseFloat(room?.price),
         card_number: formData.cardNumber,
+        transaction_date: new Date().toISOString(),
       };
 
       console.log(
@@ -129,6 +131,8 @@ const BookNowButton = ({ room }) => {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Token ${token}`,
+            "X-CSRFToken":
+              document.cookie.match(/csrftoken=([^ ;]+)/)?.[1] || "",
           },
           body: JSON.stringify(transactionData),
         }
